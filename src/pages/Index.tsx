@@ -2,6 +2,7 @@ import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import SummaryCards from "@/components/dashboard/SummaryCards";
 import PovertyCharts from "@/components/dashboard/PovertyCharts";
 import DistrictTable from "@/components/dashboard/DistrictTable";
+import MapPanel from "@/components/dashboard/MapPanel";
 
 const Index = () => {
   return (
@@ -10,6 +11,15 @@ const Index = () => {
       <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6 space-y-6">
         {/* KPI Cards */}
         <SummaryCards />
+
+        {/* Interactive Map */}
+        <section>
+          <div className="flex items-center gap-2 mb-4">
+            <h2 className="text-sm font-bold text-foreground uppercase tracking-wider">Peta Kemiskinan Kecamatan</h2>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <MapPanel />
+        </section>
 
         {/* Charts Section */}
         <section>
