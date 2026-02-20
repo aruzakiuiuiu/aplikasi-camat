@@ -1,12 +1,40 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
+import SummaryCards from "@/components/dashboard/SummaryCards";
+import PovertyCharts from "@/components/dashboard/PovertyCharts";
+import DistrictTable from "@/components/dashboard/DistrictTable";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <DashboardHeader />
+      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+        {/* KPI Cards */}
+        <SummaryCards />
+
+        {/* Charts Section */}
+        <section>
+          <div className="flex items-center gap-2 mb-4">
+            <h2 className="text-sm font-bold text-foreground uppercase tracking-wider">Analisis Visual</h2>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <PovertyCharts />
+        </section>
+
+        {/* District Table */}
+        <section>
+          <div className="flex items-center gap-2 mb-4">
+            <h2 className="text-sm font-bold text-foreground uppercase tracking-wider">Data Kecamatan</h2>
+            <div className="flex-1 h-px bg-border" />
+          </div>
+          <DistrictTable />
+        </section>
+
+        {/* Footer */}
+        <footer className="text-center py-6 text-xs text-muted-foreground border-t border-border">
+          <p>© 2026 Bappeda Kabupaten Bojonegoro · Sistem Monitoring Penanggulangan Kemiskinan</p>
+          <p className="mt-1">Data diperbarui: Februari 2026 · Sumber: BPS, DTKS, BAPPEDA</p>
+        </footer>
+      </main>
     </div>
   );
 };
