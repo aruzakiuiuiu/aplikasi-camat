@@ -60,7 +60,7 @@ export default function DistrictProfilePage() {
     );
   }
 
-  const avg = Math.round((district.scores.individual + district.scores.natural + district.scores.social + district.scores.structural) / 4);
+  const avg = Math.round((district.scores.personal + district.scores.social + district.scores.spatial + district.scores.structural) / 4);
   const overallSeverity = getSeverity(avg);
 
   const radarData = POVERTY_TYPES.map(pt => ({
@@ -319,7 +319,7 @@ export default function DistrictProfilePage() {
                 </thead>
                 <tbody>
                   {villages.map((v, i) => {
-                    const avg = Math.round((v.scores.individual + v.scores.natural + v.scores.social + v.scores.structural) / 4);
+                    const avg = Math.round((v.scores.personal + v.scores.social + v.scores.spatial + v.scores.structural) / 4);
                     const sev = getSeverity(avg);
                     return (
                       <tr key={v.id} className={`border-b border-border/50 hover:bg-muted/30 transition-colors ${i % 2 === 0 ? "" : "bg-muted/10"}`}>
@@ -353,7 +353,7 @@ export default function DistrictProfilePage() {
         </div>
 
         <footer className="text-center py-6 text-xs text-muted-foreground border-t border-border">
-          <p>© 2026 Bappeda Kabupaten Bojonegoro · Sistem Monitoring Penanggulangan Kemiskinan</p>
+          <p>© 2026 CAMAT · Alat Bantu Kepemimpinan Wilayah · Kabupaten Bojonegoro</p>
         </footer>
       </main>
     </div>

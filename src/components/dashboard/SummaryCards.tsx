@@ -1,7 +1,7 @@
-import { TrendingDown, TrendingUp, Minus, Users, Home, TreePine, Network, Building2 } from "lucide-react";
+import { TrendingDown, TrendingUp, Minus, Users, Globe, Network, Building2 } from "lucide-react";
 import { getRegencyStats, POVERTY_TYPES } from "@/data/districts";
 
-const icons = [Users, TreePine, Network, Building2];
+const icons = [Users, Network, Globe, Building2];
 
 export default function SummaryCards() {
   const stats = getRegencyStats();
@@ -60,7 +60,6 @@ export default function SummaryCards() {
               </div>
               <p className="text-2xl font-bold text-foreground mb-1">{score}<span className="text-sm font-normal text-muted-foreground">/100</span></p>
               <p className="text-[11px] text-muted-foreground mb-2">{type.label}</p>
-              {/* Progress bar */}
               <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
                 <div
                   className="h-full rounded-full transition-all"

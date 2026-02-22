@@ -43,7 +43,7 @@ export default function VillageProfilePage() {
     );
   }
 
-  const avg = Math.round((village.scores.individual + village.scores.natural + village.scores.social + village.scores.structural) / 4);
+  const avg = Math.round((village.scores.personal + village.scores.social + village.scores.spatial + village.scores.structural) / 4);
   const overallSeverity = getSeverity(avg);
   const sevColor = overallSeverity === "high" ? "text-severity-high" : overallSeverity === "medium" ? "text-severity-medium" : "text-severity-low";
   const sevBg = overallSeverity === "high" ? "bg-severity-high/10 border-severity-high/25 text-severity-high" : overallSeverity === "medium" ? "bg-severity-medium/10 border-severity-medium/25 text-severity-medium" : "bg-severity-low/10 border-severity-low/25 text-severity-low";
@@ -234,7 +234,7 @@ export default function VillageProfilePage() {
         </div>
 
         <footer className="text-center py-6 text-xs text-muted-foreground border-t border-border">
-          <p>© 2026 Bappeda Kabupaten Bojonegoro · Sistem Monitoring Penanggulangan Kemiskinan</p>
+          <p>© 2026 CAMAT · Alat Bantu Kepemimpinan Wilayah · Kabupaten Bojonegoro</p>
         </footer>
       </main>
     </div>
