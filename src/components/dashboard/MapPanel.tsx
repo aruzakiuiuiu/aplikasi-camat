@@ -85,13 +85,13 @@ export default function MapPanel() {
           <div className="flex-1 overflow-y-auto">
             {[...DISTRICTS]
               .sort((a, b) => {
-                const avgA = (a.scores.individual + a.scores.natural + a.scores.social + a.scores.structural) / 4;
-                const avgB = (b.scores.individual + b.scores.natural + b.scores.social + b.scores.structural) / 4;
+                const avgA = (a.scores.personal + a.scores.social + a.scores.spatial + a.scores.structural) / 4;
+                const avgB = (b.scores.personal + b.scores.social + b.scores.spatial + b.scores.structural) / 4;
                 return avgB - avgA;
               })
               .slice(0, 5)
               .map((d, i) => {
-                const avg = Math.round((d.scores.individual + d.scores.natural + d.scores.social + d.scores.structural) / 4);
+                const avg = Math.round((d.scores.personal + d.scores.social + d.scores.spatial + d.scores.structural) / 4);
                 const sev = getSeverity(avg);
                 return (
                   <button

@@ -1,19 +1,30 @@
-import { BarChart3, Bell, Calendar, RefreshCw } from "lucide-react";
+import { BarChart3, Bell, Calendar, RefreshCw, Shield } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+
+const NAV_ITEMS = [
+  { path: "/", label: "Dashboard" },
+  { path: "/monev", label: "Monitoring & Evaluasi" },
+  { path: "/simulasi", label: "Simulasi Intervensi" },
+];
 
 export default function DashboardHeader() {
+  const location = useLocation();
+
   return (
-    <header style={{ background: "var(--gradient-header)" }} className="text-nav-foreground px-6 py-4 shadow-lg">
-      <div className="max-w-screen-2xl mx-auto flex items-center justify-between gap-4">
+    <header style={{ background: "var(--gradient-header)" }} className="text-nav-foreground shadow-lg">
+      <div className="max-w-screen-2xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
         {/* Left: Branding */}
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/20 border border-accent/30">
-            <BarChart3 className="h-5 w-5 text-accent" />
+            <Shield className="h-5 w-5 text-accent" />
           </div>
           <div>
-            <p className="text-xs font-medium text-nav-foreground/60 tracking-widest uppercase">Kabupaten Bojonegoro</p>
             <h1 className="text-lg font-bold text-nav-foreground leading-tight">
-              Monitoring Penanggulangan Kemiskinan
+              CAMAT <span className="text-accent text-sm font-medium">Cermat & Tepat</span>
             </h1>
+            <p className="text-xs font-medium text-nav-foreground/60 tracking-wide">
+              Alat Bantu Kepemimpinan Wilayah · Kabupaten Bojonegoro
+            </p>
           </div>
         </div>
 
@@ -34,25 +45,25 @@ export default function DashboardHeader() {
         </div>
       </div>
 
-      {/* Subtitle bar */}
-      <div className="max-w-screen-2xl mx-auto mt-3 flex flex-wrap items-center gap-3 text-xs text-nav-foreground/60">
-        <span className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-poverty-individual inline-block" />
-          Individual/Keluarga
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-poverty-natural inline-block" />
-          Lingkungan Alam
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-poverty-social inline-block" />
-          Lingkungan Sosial
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-poverty-structural inline-block" />
-          Tata Kelola Struktural
-        </span>
-        <span className="ml-auto">28 Kecamatan · Sumber: BAPPEDA Bojonegoro</span>
+      {/* Navigation bar */}
+      <div className="max-w-screen-2xl mx-auto px-6 pb-2 flex flex-wrap items-center gap-1">
+        {NAV_ITEMS.map(item => {
+          const isActive = location.pathname === item.path;
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+                isActive
+                  ? "bg-nav-foreground/20 text-nav-foreground"
+                  : "text-nav-foreground/60 hover:bg-nav-foreground/10 hover:text-nav-foreground/80"
+              }`}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
+        <span className="ml-auto text-xs text-nav-foreground/50">28 Kecamatan · Sumber: BAPPEDA Bojonegoro</span>
       </div>
     </header>
   );

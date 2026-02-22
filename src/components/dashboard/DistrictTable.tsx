@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ChevronUp, ChevronDown, TrendingUp, TrendingDown, Minus, Search } from "lucide-react";
 import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel, type District } from "@/data/districts";
 
-type SortKey = "name" | "povertyRate" | "individual" | "natural" | "social" | "structural";
+type SortKey = "name" | "povertyRate" | "personal" | "social" | "spatial" | "structural";
 
 function ScoreCell({ score }: { score: number }) {
   const sev = getSeverity(score);
@@ -55,7 +55,6 @@ export default function DistrictTable() {
 
   return (
     <div className="dashboard-card overflow-hidden">
-      {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-3 px-5 py-4 border-b border-border">
         <h2 className="font-bold text-foreground text-base flex-shrink-0">Data Per Kecamatan</h2>
         <div className="flex-1 min-w-[180px] max-w-[280px] relative">
@@ -82,7 +81,6 @@ export default function DistrictTable() {
         <span className="text-xs text-muted-foreground">{filtered.length} kecamatan</span>
       </div>
 
-      {/* Table */}
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
@@ -120,9 +118,9 @@ export default function DistrictTable() {
                     {district.povertyRate}%
                   </span>
                 </td>
-                <td className="px-4 py-3"><ScoreCell score={district.scores.individual} /></td>
-                <td className="px-4 py-3"><ScoreCell score={district.scores.natural} /></td>
+                <td className="px-4 py-3"><ScoreCell score={district.scores.personal} /></td>
                 <td className="px-4 py-3"><ScoreCell score={district.scores.social} /></td>
+                <td className="px-4 py-3"><ScoreCell score={district.scores.spatial} /></td>
                 <td className="px-4 py-3"><ScoreCell score={district.scores.structural} /></td>
                 <td className="px-4 py-3"><TrendBadge trend={district.trend} /></td>
               </tr>

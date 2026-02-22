@@ -45,9 +45,9 @@
     --nav-bg: 215 48% 14%;
     --nav-foreground: 200 40% 90%;
 
-    --poverty-individual: 0 72% 54%;
-    --poverty-natural: 34 90% 50%;
+    --poverty-personal: 0 72% 54%;
     --poverty-social: 200 72% 40%;
+    --poverty-spatial: 34 90% 50%;
     --poverty-structural: 270 55% 50%;
 
     --severity-high: 0 72% 54%;
@@ -98,16 +98,22 @@
     border: 1px solid hsl(var(--border));
   }
 
-  .stat-badge-individual {
-    background: hsl(var(--poverty-individual) / 0.1);
-    color: hsl(var(--poverty-individual));
-    border: 1px solid hsl(var(--poverty-individual) / 0.25);
+  .stat-badge-personal {
+    background: hsl(var(--poverty-personal) / 0.1);
+    color: hsl(var(--poverty-personal));
+    border: 1px solid hsl(var(--poverty-personal) / 0.25);
   }
 
-  .stat-badge-natural {
-    background: hsl(var(--poverty-natural) / 0.1);
-    color: hsl(var(--poverty-natural));
-    border: 1px solid hsl(var(--poverty-natural) / 0.25);
+  .stat-badge-social {
+    background: hsl(var(--poverty-social) / 0.1);
+    color: hsl(var(--poverty-social));
+    border: 1px solid hsl(var(--poverty-social) / 0.25);
+  }
+
+  .stat-badge-spatial {
+    background: hsl(var(--poverty-spatial) / 0.1);
+    color: hsl(var(--poverty-spatial));
+    border: 1px solid hsl(var(--poverty-spatial) / 0.25);
   }
 
   .stat-badge-social {

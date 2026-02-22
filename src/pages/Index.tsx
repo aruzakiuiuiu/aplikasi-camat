@@ -41,7 +41,7 @@ const Index = () => {
 
         {/* Footer */}
         <footer className="text-center py-6 text-xs text-muted-foreground border-t border-border">
-          <p>© 2026 Bappeda Kabupaten Bojonegoro · Sistem Monitoring Penanggulangan Kemiskinan</p>
+          <p>© 2026 CAMAT (Cermat & Tepat) · Alat Bantu Kepemimpinan Wilayah · Kabupaten Bojonegoro</p>
           <p className="mt-1">Data diperbarui: Februari 2026 · Sumber: BPS, DTKS, BAPPEDA</p>
         </footer>
       </main>

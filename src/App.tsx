@@ -8,6 +8,8 @@ import NotFound from "./pages/NotFound";
 import DistrictProfilePage from "./pages/DistrictProfilePage";
 import VillageProfilePage from "./pages/VillageProfilePage";
 import HouseholdListPage from "./pages/HouseholdListPage";
+import MonevPage from "./pages/MonevPage";
+import SimulasiPage from "./pages/SimulasiPage";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +24,8 @@ const App = () => (
           <Route path="/district/:id" element={<DistrictProfilePage />} />
           <Route path="/village/:id" element={<VillageProfilePage />} />
           <Route path="/village/:id/households" element={<HouseholdListPage />} />
+          <Route path="/monev" element={<MonevPage />} />
+          <Route path="/simulasi" element={<SimulasiPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

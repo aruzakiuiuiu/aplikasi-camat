@@ -52,9 +52,9 @@ export default {
           foreground: "hsl(var(--nav-foreground))",
         },
         poverty: {
-          individual: "hsl(var(--poverty-individual))",
-          natural: "hsl(var(--poverty-natural))",
+          personal: "hsl(var(--poverty-personal))",
           social: "hsl(var(--poverty-social))",
+          spatial: "hsl(var(--poverty-spatial))",
           structural: "hsl(var(--poverty-structural))",
         },
         severity: {
