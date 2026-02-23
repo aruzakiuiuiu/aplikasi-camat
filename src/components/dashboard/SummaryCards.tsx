@@ -1,5 +1,6 @@
 import { TrendingDown, TrendingUp, Minus, Users, Globe, Network, Building2 } from "lucide-react";
 import { getRegencyStats, POVERTY_TYPES } from "@/data/districts";
+import PovertyDimensionTooltip from "./PovertyDimensionTooltip";
 
 const icons = [Users, Network, Globe, Building2];
 
@@ -50,23 +51,25 @@ export default function SummaryCards() {
           const severityColor = score >= 70 ? "text-severity-high" : score >= 45 ? "text-severity-medium" : "text-severity-low";
           const pct = score;
           return (
-            <div key={type.key} className="dashboard-card p-4">
-              <div className="flex items-center justify-between mb-3">
-                <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-semibold ${type.bgClass}`}>
-                  <Icon className="h-3 w-3" />
-                  {type.shortLabel}
-                </span>
-                <span className={`text-xs font-bold ${severityColor}`}>{severity}</span>
+            <PovertyDimensionTooltip key={type.key} dimensionKey={type.key} score={score}>
+              <div className="dashboard-card p-4">
+                <div className="flex items-center justify-between mb-3">
+                  <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-semibold ${type.bgClass}`}>
+                    <Icon className="h-3 w-3" />
+                    {type.shortLabel}
+                  </span>
+                  <span className={`text-xs font-bold ${severityColor}`}>{severity}</span>
+                </div>
+                <p className="text-2xl font-bold text-foreground mb-1">{score}<span className="text-sm font-normal text-muted-foreground">/100</span></p>
+                <p className="text-[11px] text-muted-foreground mb-2">{type.label}</p>
+                <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
+                  <div
+                    className="h-full rounded-full transition-all"
+                    style={{ width: `${pct}%`, backgroundColor: type.color }}
+                  />
+                </div>
               </div>
-              <p className="text-2xl font-bold text-foreground mb-1">{score}<span className="text-sm font-normal text-muted-foreground">/100</span></p>
-              <p className="text-[11px] text-muted-foreground mb-2">{type.label}</p>
-              <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
-                <div
-                  className="h-full rounded-full transition-all"
-                  style={{ width: `${pct}%`, backgroundColor: type.color }}
-                />
-              </div>
-            </div>
+            </PovertyDimensionTooltip>
           );
         })}
       </div>
