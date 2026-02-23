@@ -9,6 +9,8 @@ import {
   GraduationCap, Briefcase, MapPin, AlertTriangle, Zap, Droplets,
   ChevronRight, BarChart2, BookOpen, Building2
 } from "lucide-react";
+import PovertyDimensionTooltip from "@/components/dashboard/PovertyDimensionTooltip";
+import { DIMENSION_DEFINITIONS, getDistrictSubScores } from "@/data/povertyIndicators";
 
 const TREND_ICON = {
   improving: <TrendingDown className="h-4 w-4 text-severity-low" />,
@@ -156,21 +158,23 @@ export default function DistrictProfilePage() {
               const sev = getSeverity(score);
               const sevColor = sev === "high" ? "hsl(var(--severity-high))" : sev === "medium" ? "hsl(var(--severity-medium))" : "hsl(var(--severity-low))";
               return (
-                <div key={pt.key} className="dashboard-card p-4">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="h-2.5 w-2.5 rounded-full flex-shrink-0" style={{ background: pt.color }} />
-                    <span className="text-xs font-medium text-muted-foreground">{pt.label}</span>
+                <PovertyDimensionTooltip key={pt.key} dimensionKey={pt.key} score={score} districtId={district.id} districtScores={district.scores}>
+                  <div className="dashboard-card p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="h-2.5 w-2.5 rounded-full flex-shrink-0" style={{ background: pt.color }} />
+                      <span className="text-xs font-medium text-muted-foreground">{pt.label}</span>
+                    </div>
+                    <div className="flex items-end gap-2 mb-2">
+                      <span className="text-2xl font-bold" style={{ color: sevColor }}>{score}</span>
+                      <span className="text-xs text-muted-foreground mb-1">/100</span>
+                    </div>
+                    <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+                      <div className="h-full rounded-full transition-all" style={{ width: `${score}%`, background: pt.color }} />
+                    </div>
+                    <p className="text-xs font-semibold mt-2" style={{ color: sevColor }}>{getSeverityLabel(score)}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{pt.description}</p>
                   </div>
-                  <div className="flex items-end gap-2 mb-2">
-                    <span className="text-2xl font-bold" style={{ color: sevColor }}>{score}</span>
-                    <span className="text-xs text-muted-foreground mb-1">/100</span>
-                  </div>
-                  <div className="h-1.5 rounded-full bg-muted overflow-hidden">
-                    <div className="h-full rounded-full transition-all" style={{ width: `${score}%`, background: pt.color }} />
-                  </div>
-                  <p className="text-xs font-semibold mt-2" style={{ color: sevColor }}>{getSeverityLabel(score)}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">{pt.description}</p>
-                </div>
+                </PovertyDimensionTooltip>
               );
             })}
           </div>
@@ -285,6 +289,46 @@ export default function DistrictProfilePage() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Detailed Sub-Indicator Breakdown */}
+        <div>
+          <SectionTitle icon={<BarChart2 className="h-4 w-4" />} title="Breakdown Sub-Indikator per Dimensi" />
+          <div className="grid md:grid-cols-2 gap-4">
+            {DIMENSION_DEFINITIONS.map(dim => {
+              const dimScore = district.scores[dim.key];
+              const subScoresData = getDistrictSubScores(district.id, district.scores).dimensions[dim.key];
+              const dimSev = getSeverity(dimScore);
+              const dimSevColor = dimSev === "high" ? "text-severity-high" : dimSev === "medium" ? "text-severity-medium" : "text-severity-low";
+              return (
+                <div key={dim.key} className="dashboard-card p-4">
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">{dim.label}</h4>
+                    <span className={`text-sm font-bold mono ${dimSevColor}`}>{dimScore}/100</span>
+                  </div>
+                  <p className="text-[10px] text-muted-foreground mb-3">{dim.focus}</p>
+                  <div className="space-y-2.5">
+                    {dim.subCategories.map(sub => {
+                      const subScore = subScoresData[sub.id];
+                      const subSev = getSeverity(subScore);
+                      return (
+                        <div key={sub.id}>
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-xs font-semibold text-foreground">{sub.label}</span>
+                            <span className={`text-xs font-bold mono ${subSev === "high" ? "text-severity-high" : subSev === "medium" ? "text-severity-medium" : "text-severity-low"}`}>{subScore}</span>
+                          </div>
+                          <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+                            <div className={`h-full rounded-full ${subSev === "high" ? "bg-severity-high" : subSev === "medium" ? "bg-severity-medium" : "bg-severity-low"}`} style={{ width: `${subScore}%` }} />
+                          </div>
+                          <p className="text-[10px] text-muted-foreground mt-0.5">{sub.description}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 

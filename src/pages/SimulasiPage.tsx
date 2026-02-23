@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel } from "@/data/districts";
 import { getDistrictProfile } from "@/data/districtProfiles";
+import PovertyDimensionTooltip from "@/components/dashboard/PovertyDimensionTooltip";
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip,
   BarChart, Bar, XAxis, YAxis, Cell
@@ -9,17 +10,20 @@ import {
 import { Zap, TrendingDown, Target, Lightbulb, ChevronDown, Calculator, MapPin } from "lucide-react";
 
 // Intervention types with impact coefficients per poverty dimension
+// Aligned with the holistic poverty framework sub-indicators
 const INTERVENTIONS = [
-  { id: "int-1", name: "Bantuan Sosial Langsung (PKH/BPNT)", impacts: { personal: -8, social: -3, spatial: 0, structural: -2 }, cost: "Rp 2.4jt/KK/thn", timeframe: "3–6 bulan" },
-  { id: "int-2", name: "Program Stunting & Gizi Anak", impacts: { personal: -12, social: -5, spatial: 0, structural: -3 }, cost: "Rp 5jt/anak/thn", timeframe: "6–18 bulan" },
-  { id: "int-3", name: "Pembangunan Infrastruktur Air Bersih", impacts: { personal: -3, social: -2, spatial: -15, structural: -5 }, cost: "Rp 350jt/embung", timeframe: "6–12 bulan" },
-  { id: "int-4", name: "Rehabilitasi Jalan Desa", impacts: { personal: -2, social: -4, spatial: -10, structural: -6 }, cost: "Rp 500jt/km", timeframe: "3–9 bulan" },
-  { id: "int-5", name: "KUR & Pemberdayaan Ekonomi", impacts: { personal: -6, social: -5, spatial: -1, structural: -8 }, cost: "Rp 10jt/KK", timeframe: "6–24 bulan" },
-  { id: "int-6", name: "Sanitasi Total Berbasis Masyarakat", impacts: { personal: -5, social: -8, spatial: -12, structural: -4 }, cost: "Rp 15jt/desa", timeframe: "3–12 bulan" },
-  { id: "int-7", name: "Peningkatan Kualitas Pendidikan", impacts: { personal: -10, social: -7, spatial: 0, structural: -5 }, cost: "Rp 50jt/sekolah/thn", timeframe: "12–36 bulan" },
-  { id: "int-8", name: "Penguatan Tata Kelola Desa", impacts: { personal: -2, social: -3, spatial: -2, structural: -14 }, cost: "Rp 25jt/desa/thn", timeframe: "6–18 bulan" },
-  { id: "int-9", name: "Diversifikasi Pertanian", impacts: { personal: -7, social: -4, spatial: -6, structural: -3 }, cost: "Rp 8jt/KK", timeframe: "6–24 bulan" },
-  { id: "int-10", name: "Mitigasi Bencana & Adaptasi Iklim", impacts: { personal: -1, social: -3, spatial: -18, structural: -6 }, cost: "Rp 200jt/desa", timeframe: "12–36 bulan" },
+  { id: "int-1", name: "Bantuan Sosial Langsung (PKH/BPNT)", category: "Personal", impacts: { personal: -8, social: -3, spatial: 0, structural: -2 }, cost: "Rp 2.4jt/KK/thn", timeframe: "3–6 bulan", targetDimension: "Pendapatan RT, kerentanan keluarga" },
+  { id: "int-2", name: "Program Stunting & Gizi Anak", category: "Personal", impacts: { personal: -12, social: -5, spatial: 0, structural: -3 }, cost: "Rp 5jt/anak/thn", timeframe: "6–18 bulan", targetDimension: "Kesehatan keluarga, gizi" },
+  { id: "int-3", name: "Pembangunan Infrastruktur Air Bersih", category: "Kawasan", impacts: { personal: -3, social: -2, spatial: -15, structural: -5 }, cost: "Rp 350jt/embung", timeframe: "6–12 bulan", targetDimension: "Infrastruktur lingkungan, SDA" },
+  { id: "int-4", name: "Rehabilitasi Jalan Desa", category: "Kawasan", impacts: { personal: -2, social: -4, spatial: -10, structural: -6 }, cost: "Rp 500jt/km", timeframe: "3–9 bulan", targetDimension: "Aksesibilitas fisik, permukiman" },
+  { id: "int-5", name: "KUR & Pemberdayaan Ekonomi", category: "Sosial", impacts: { personal: -6, social: -5, spatial: -1, structural: -8 }, cost: "Rp 10jt/KK", timeframe: "6–24 bulan", targetDimension: "Akses ekonomi, peluang ekonomi lokal" },
+  { id: "int-6", name: "Sanitasi Total Berbasis Masyarakat", category: "Kawasan", impacts: { personal: -5, social: -8, spatial: -12, structural: -4 }, cost: "Rp 15jt/desa", timeframe: "3–12 bulan", targetDimension: "Sanitasi, infrastruktur lingkungan" },
+  { id: "int-7", name: "Peningkatan Kualitas Pendidikan", category: "Personal", impacts: { personal: -10, social: -7, spatial: 0, structural: -5 }, cost: "Rp 50jt/sekolah/thn", timeframe: "12–36 bulan", targetDimension: "Pendidikan & literasi, produktivitas" },
+  { id: "int-8", name: "Penguatan Tata Kelola Desa", category: "Struktural", impacts: { personal: -2, social: -3, spatial: -2, structural: -14 }, cost: "Rp 25jt/desa/thn", timeframe: "6–18 bulan", targetDimension: "Kapasitas kelembagaan, koordinasi" },
+  { id: "int-9", name: "Diversifikasi Pertanian", category: "Sosial", impacts: { personal: -7, social: -4, spatial: -6, structural: -3 }, cost: "Rp 8jt/KK", timeframe: "6–24 bulan", targetDimension: "Mata pencaharian, struktur ekonomi" },
+  { id: "int-10", name: "Mitigasi Bencana & Adaptasi Iklim", category: "Kawasan", impacts: { personal: -1, social: -3, spatial: -18, structural: -6 }, cost: "Rp 200jt/desa", timeframe: "12–36 bulan", targetDimension: "Kondisi geografis, risiko bencana" },
+  { id: "int-11", name: "Pemberdayaan Perempuan & Kesetaraan", category: "Sosial", impacts: { personal: -5, social: -10, spatial: 0, structural: -4 }, cost: "Rp 12jt/kelompok", timeframe: "6–18 bulan", targetDimension: "Peran perempuan, modal sosial" },
+  { id: "int-12", name: "Integrasi Data & Sistem Informasi", category: "Struktural", impacts: { personal: -1, social: -2, spatial: -1, structural: -12 }, cost: "Rp 50jt/sistem", timeframe: "6–12 bulan", targetDimension: "Integrasi data, efektivitas kebijakan" },
 ];
 
 export default function SimulasiPage() {
@@ -124,10 +128,12 @@ export default function SimulasiPage() {
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 flex-1">
               {POVERTY_TYPES.map(pt => (
-                <div key={pt.key} className="text-center">
-                  <p className="text-xs text-muted-foreground">{pt.shortLabel}</p>
-                  <p className="text-lg font-bold" style={{ color: pt.color }}>{district.scores[pt.key]}</p>
-                </div>
+                <PovertyDimensionTooltip key={pt.key} dimensionKey={pt.key} score={district.scores[pt.key]} districtId={district.id} districtScores={district.scores}>
+                  <div className="text-center">
+                    <p className="text-xs text-muted-foreground">{pt.shortLabel}</p>
+                    <p className="text-lg font-bold" style={{ color: pt.color }}>{district.scores[pt.key]}</p>
+                  </div>
+                </PovertyDimensionTooltip>
               ))}
             </div>
           </div>
@@ -155,7 +161,11 @@ export default function SimulasiPage() {
                     <span className="flex h-5 w-5 items-center justify-center rounded-full bg-accent/20 text-accent text-xs font-bold flex-shrink-0 mt-0.5">{i + 1}</span>
                     <div>
                       <p className="text-sm font-medium text-foreground">{rec.name}</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">Dampak estimasi: skor -{rec.totalImpact} poin · {rec.cost} · {rec.timeframe}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-primary/10 text-primary mr-1">{rec.category}</span>
+                        Dampak: -{rec.totalImpact} poin · {rec.cost} · {rec.timeframe}
+                      </p>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">Target: {rec.targetDimension}</p>
                     </div>
                   </button>
                 ))}
@@ -180,7 +190,11 @@ export default function SimulasiPage() {
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-foreground">{int.name}</p>
-                          <p className="text-xs text-muted-foreground">{int.cost} · {int.timeframe}</p>
+                          <p className="text-xs text-muted-foreground">
+                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-muted text-muted-foreground mr-1">{int.category}</span>
+                            {int.cost} · {int.timeframe}
+                          </p>
+                          <p className="text-[10px] text-muted-foreground">Target: {int.targetDimension}</p>
                         </div>
                       </div>
                       {isSelected && (
