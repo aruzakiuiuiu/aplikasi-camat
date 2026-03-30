@@ -80,8 +80,7 @@ export default function DistrictProfilePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <DashboardHeader />
+    <>
 
       {/* Breadcrumb */}
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 pt-4">
