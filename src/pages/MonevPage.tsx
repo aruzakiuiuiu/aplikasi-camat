@@ -100,9 +100,7 @@ export default function MonevPage() {
   const totalRealized = PROGRAMS.reduce((s, p) => s + p.realized, 0);
 
   return (
-    <div className="min-h-screen bg-background">
-      <DashboardHeader />
-      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+    <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6 space-y-6">
         {/* Page title */}
         <div>
           <h1 className="text-xl font-bold text-foreground">Monitoring & Evaluasi</h1>
