@@ -2,7 +2,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel } from "@/data/districts";
 import { getVillageById } from "@/data/villages";
 import { generateHouseholds } from "@/data/villages";
-import DashboardHeader from "@/components/dashboard/DashboardHeader";
+
 import {
   ArrowLeft, ChevronRight, MapPin, Users, Home, AlertTriangle,
   TrendingDown, TrendingUp, Minus, Sprout, Map, Zap, List
