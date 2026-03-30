@@ -277,7 +277,6 @@ export default function MonevPage() {
         <footer className="text-center py-6 text-xs text-muted-foreground border-t border-border">
           <p>© 2026 CAMAT (Cermat & Tepat) · Alat Bantu Kepemimpinan Wilayah · Kabupaten Bojonegoro</p>
         </footer>
-      </main>
-    </div>
+    </main>
   );
 }

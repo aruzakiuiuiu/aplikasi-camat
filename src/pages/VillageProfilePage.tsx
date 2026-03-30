@@ -236,6 +236,6 @@ export default function VillageProfilePage() {
           <p>© 2026 CAMAT · Alat Bantu Kepemimpinan Wilayah · Kabupaten Bojonegoro</p>
         </footer>
       </main>
-    </div>
+    </>
   );
 }
