@@ -1,7 +1,7 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { DISTRICTS } from "@/data/districts";
 import { getVillageById, generateHouseholds } from "@/data/villages";
-import DashboardHeader from "@/components/dashboard/DashboardHeader";
+
 import { ArrowLeft, ChevronRight, Users, Home, Briefcase, Gift, Tractor } from "lucide-react";
 
 const conditionLabel = {
