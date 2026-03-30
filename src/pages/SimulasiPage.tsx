@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import DashboardHeader from "@/components/dashboard/DashboardHeader";
+
 import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel } from "@/data/districts";
 import { getDistrictProfile } from "@/data/districtProfiles";
 import PovertyDimensionTooltip from "@/components/dashboard/PovertyDimensionTooltip";
