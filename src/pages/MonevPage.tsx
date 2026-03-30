@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DashboardHeader from "@/components/dashboard/DashboardHeader";
+
 import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel } from "@/data/districts";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LineChart, Line, CartesianGrid, Legend,
