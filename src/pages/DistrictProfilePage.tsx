@@ -2,7 +2,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel } from "@/data/districts";
 import { getDistrictProfile } from "@/data/districtProfiles";
 import { getVillagesByDistrict } from "@/data/villages";
-import DashboardHeader from "@/components/dashboard/DashboardHeader";
+
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer, Tooltip } from "recharts";
 import {
   ArrowLeft, Users, Home, TrendingDown, TrendingUp, Minus,
