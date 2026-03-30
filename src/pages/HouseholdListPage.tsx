@@ -37,8 +37,7 @@ export default function HouseholdListPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <DashboardHeader />
+    <>
 
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 pt-4">
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground flex-wrap">
