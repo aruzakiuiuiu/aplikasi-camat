@@ -1,7 +1,7 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { DISTRICTS } from "@/data/districts";
 import { getVillageById, generateHouseholds } from "@/data/villages";
-import DashboardHeader from "@/components/dashboard/DashboardHeader";
+
 import { ArrowLeft, ChevronRight, Users, Home, Briefcase, Gift, Tractor } from "lucide-react";
 
 const conditionLabel = {
@@ -37,8 +37,7 @@ export default function HouseholdListPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <DashboardHeader />
+    <>
 
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 pt-4">
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground flex-wrap">
@@ -165,6 +164,6 @@ export default function HouseholdListPage() {
           <p>© 2026 CAMAT · Alat Bantu Kepemimpinan Wilayah · Kabupaten Bojonegoro</p>
         </footer>
       </main>
-    </div>
+    </>
   );
 }

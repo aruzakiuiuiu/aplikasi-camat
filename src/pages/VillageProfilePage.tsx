@@ -2,7 +2,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel } from "@/data/districts";
 import { getVillageById } from "@/data/villages";
 import { generateHouseholds } from "@/data/villages";
-import DashboardHeader from "@/components/dashboard/DashboardHeader";
+
 import {
   ArrowLeft, ChevronRight, MapPin, Users, Home, AlertTriangle,
   TrendingDown, TrendingUp, Minus, Sprout, Map, Zap, List
@@ -60,8 +60,7 @@ export default function VillageProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <DashboardHeader />
+    <>
 
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 pt-4">
         <nav className="flex items-center gap-1.5 text-xs text-muted-foreground flex-wrap">
@@ -237,6 +236,6 @@ export default function VillageProfilePage() {
           <p>© 2026 CAMAT · Alat Bantu Kepemimpinan Wilayah · Kabupaten Bojonegoro</p>
         </footer>
       </main>
-    </div>
+    </>
   );
 }

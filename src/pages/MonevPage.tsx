@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DashboardHeader from "@/components/dashboard/DashboardHeader";
+
 import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel } from "@/data/districts";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LineChart, Line, CartesianGrid, Legend,
@@ -100,9 +100,7 @@ export default function MonevPage() {
   const totalRealized = PROGRAMS.reduce((s, p) => s + p.realized, 0);
 
   return (
-    <div className="min-h-screen bg-background">
-      <DashboardHeader />
-      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+    <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6 space-y-6">
         {/* Page title */}
         <div>
           <h1 className="text-xl font-bold text-foreground">Monitoring & Evaluasi</h1>
@@ -279,7 +277,6 @@ export default function MonevPage() {
         <footer className="text-center py-6 text-xs text-muted-foreground border-t border-border">
           <p>© 2026 CAMAT (Cermat & Tepat) · Alat Bantu Kepemimpinan Wilayah · Kabupaten Bojonegoro</p>
         </footer>
-      </main>
-    </div>
+    </main>
   );
 }

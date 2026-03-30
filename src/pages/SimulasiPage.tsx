@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import DashboardHeader from "@/components/dashboard/DashboardHeader";
+
 import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel } from "@/data/districts";
 import { getDistrictProfile } from "@/data/districtProfiles";
 import PovertyDimensionTooltip from "@/components/dashboard/PovertyDimensionTooltip";
@@ -100,9 +100,7 @@ export default function SimulasiPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-background">
-      <DashboardHeader />
-      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+    <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6 space-y-6">
         <div>
           <h1 className="text-xl font-bold text-foreground">Simulasi Intervensi</h1>
           <p className="text-sm text-muted-foreground">Proyeksikan dampak intervensi terhadap penurunan kemiskinan per kecamatan</p>
@@ -317,7 +315,6 @@ export default function SimulasiPage() {
         <footer className="text-center py-6 text-xs text-muted-foreground border-t border-border">
           <p>© 2026 CAMAT (Cermat & Tepat) · Alat Bantu Kepemimpinan Wilayah · Kabupaten Bojonegoro</p>
         </footer>
-      </main>
-    </div>
+    </main>
   );
 }

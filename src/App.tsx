@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AppLayout from "@/components/layout/AppLayout";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import DistrictProfilePage from "./pages/DistrictProfilePage";
@@ -19,16 +20,17 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/district/:id" element={<DistrictProfilePage />} />
-          <Route path="/village/:id" element={<VillageProfilePage />} />
-          <Route path="/village/:id/households" element={<HouseholdListPage />} />
-          <Route path="/monev" element={<MonevPage />} />
-          <Route path="/simulasi" element={<SimulasiPage />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AppLayout>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/district/:id" element={<DistrictProfilePage />} />
+            <Route path="/village/:id" element={<VillageProfilePage />} />
+            <Route path="/village/:id/households" element={<HouseholdListPage />} />
+            <Route path="/monev" element={<MonevPage />} />
+            <Route path="/simulasi" element={<SimulasiPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AppLayout>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

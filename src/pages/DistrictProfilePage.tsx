@@ -2,7 +2,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel } from "@/data/districts";
 import { getDistrictProfile } from "@/data/districtProfiles";
 import { getVillagesByDistrict } from "@/data/villages";
-import DashboardHeader from "@/components/dashboard/DashboardHeader";
+
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer, Tooltip } from "recharts";
 import {
   ArrowLeft, Users, Home, TrendingDown, TrendingUp, Minus,
@@ -80,8 +80,7 @@ export default function DistrictProfilePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <DashboardHeader />
+    <>
 
       {/* Breadcrumb */}
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 pt-4">
@@ -400,6 +399,6 @@ export default function DistrictProfilePage() {
           <p>© 2026 CAMAT · Alat Bantu Kepemimpinan Wilayah · Kabupaten Bojonegoro</p>
         </footer>
       </main>
-    </div>
+    </>
   );
 }
