@@ -142,6 +142,52 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Cari Kecamatan</SidebarGroupLabel>
+          <SidebarGroupContent>
+            {!collapsed && (
+              <div className="px-2 pb-2">
+                <div className="relative">
+                  <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+                  <Input
+                    placeholder="Ketik nama kecamatan..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="h-8 pl-7 text-xs bg-sidebar-accent/30 border-sidebar-border"
+                  />
+                </div>
+              </div>
+            )}
+            <SidebarMenu className="max-h-[200px] overflow-y-auto">
+              {filteredDistricts.map((d) => {
+                const avg = Math.round((d.scores.personal + d.scores.social + d.scores.spatial + d.scores.structural) / 4);
+                return (
+                  <SidebarMenuItem key={d.id}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive(`/district/${d.id}`)}
+                      tooltip={d.name}
+                    >
+                      <NavLink
+                        to={`/district/${d.id}`}
+                        className="hover:bg-sidebar-accent/50"
+                        activeClassName="bg-sidebar-accent text-sidebar-accent-foreground font-semibold"
+                      >
+                        <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
+                        <span className="truncate">{d.name}</span>
+                        <span className="ml-auto text-[10px] font-mono text-muted-foreground">{avg}</span>
+                      </NavLink>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+              {filteredDistricts.length === 0 && (
+                <p className="text-xs text-muted-foreground text-center py-3">Tidak ditemukan</p>
+              )}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
 
       <SidebarFooter className="border-t border-sidebar-border px-3 py-3">
