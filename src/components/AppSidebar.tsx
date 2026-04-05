@@ -1,5 +1,7 @@
-import { LayoutDashboard, Activity, Calculator, Shield, AlertTriangle, MapPin, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { LayoutDashboard, Activity, Calculator, Shield, AlertTriangle, MapPin, ChevronDown, Search } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
+import { Input } from "@/components/ui/input";
 import { useLocation } from "react-router-dom";
 import { DISTRICTS, getSeverity } from "@/data/districts";
 import {
