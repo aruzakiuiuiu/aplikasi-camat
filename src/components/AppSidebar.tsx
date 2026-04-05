@@ -46,6 +46,10 @@ export function AppSidebar() {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
   const isPriorityActive = PRIORITY_DISTRICTS.some(d => location.pathname === `/district/${d.id}`);
+  const [search, setSearch] = useState("");
+  const filteredDistricts = DISTRICTS.filter(d =>
+    d.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <Sidebar collapsible="icon">
