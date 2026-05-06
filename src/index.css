@@ -133,3 +133,34 @@
   .severity-low { color: hsl(var(--severity-low)); }
 }
 
+/* Leaflet map container overrides */
+.leaflet-container {
+  background: hsl(210 20% 96%);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  z-index: 0;
+}
+
+.leaflet-control-zoom {
+  border: 1px solid hsl(210 20% 87%) !important;
+  box-shadow: 0 2px 6px -2px hsl(215 35% 12% / 0.12) !important;
+}
+
+.leaflet-control-zoom a {
+  color: hsl(215 35% 20%) !important;
+  font-family: inherit !important;
+}
+
+.leaflet-tooltip-camat {
+  background: white;
+  border: 1px solid hsl(210 20% 87%);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px -2px hsl(215 35% 12% / 0.15);
+  font-size: 12px;
+  padding: 6px 10px;
+  color: hsl(215 35% 12%);
+}
+
+.leaflet-tooltip-camat::before {
+  border-top-color: hsl(210 20% 87%);
+}
+

@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import PovertyDimensionTooltip from "@/components/dashboard/PovertyDimensionTooltip";
 import { DIMENSION_DEFINITIONS, getDistrictSubScores } from "@/data/povertyIndicators";
+import BojonegoroDistrictMap from "@/components/map/BojonegoroDistrictMap";
 
 const TREND_ICON = {
   improving: <TrendingDown className="h-4 w-4 text-severity-low" />,
@@ -342,6 +343,23 @@ export default function DistrictProfilePage() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* District Map — Batas Desa */}
+        <div>
+          <SectionTitle icon={<MapPin className="h-4 w-4" />} title={`Peta Batas Administrasi Desa — Kec. ${district.name}`} />
+          <div className="dashboard-card overflow-hidden" style={{ height: "380px" }}>
+            <BojonegoroDistrictMap
+              districtId={district.id}
+              onSelectVillage={(desaName) => {
+                const village = villages.find(v => v.name.toLowerCase() === desaName.toLowerCase());
+                if (village) navigate(`/village/${village.id}`);
+              }}
+            />
+          </div>
+          <p className="text-xs text-muted-foreground mt-1.5 pl-1">
+            Klik pada polygon desa untuk melihat profil desa. Warna menunjukkan tingkat kemiskinan berdasarkan data aplikasi.
+          </p>
         </div>
 
         {/* Villages */}
