@@ -247,7 +247,7 @@ export const DISTRICT_PROFILES: DistrictProfile[] = [
     mainRiver: "Tidak ada sungai besar",
     keyIssues: ["Lahan kering tidak produktif","Kekeringan berulang","Stunting tinggi","Isolasi desa terpencil"],
     recommendedInterventions: ["Tanaman tahan kering","Embung desa","Program gizi","Akses jalan"],
-    diagnosis: "Purwoharo menghadapi tantangan lahan kering dan kekeringan yang berulang. Diperlukan pendekatan adaptasi pertanian yang menyeluruh disertai perbaikan infrastruktur dasar.",
+    diagnosis: "Sukosewu menghadapi tantangan lahan kering dan kekeringan yang berulang. Diperlukan pendekatan adaptasi pertanian yang menyeluruh disertai perbaikan infrastruktur dasar.",
   },
   {
     districtId: "bjn-16",
