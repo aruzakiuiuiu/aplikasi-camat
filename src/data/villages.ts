@@ -106,7 +106,7 @@ const GENERIC_VILLAGE_NAMES: Record<string, string[]> = {
   "bjn-12": ["Ngraho","Ngepung","Mojorejo"],
   "bjn-13": ["Ngasem","Jelu","Nganti"],
   "bjn-14": ["Padangan","Cendono","Kuncen"],
-  "bjn-15": ["Sukosewu","Rendeng","Glindon"],
+  "bjn-15": ["Purwoharo","Rendeng","Glindon"],
   "bjn-16": ["Baureno","Trojalu","Gunungsari"],
   "bjn-17": ["Sugihwaras","Pejok","Wedoro"],
   "bjn-18": ["Temayang","Kedungsumber","Pejok"],

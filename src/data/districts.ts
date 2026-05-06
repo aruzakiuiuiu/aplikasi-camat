@@ -31,7 +31,7 @@ export const DISTRICTS: District[] = [
   { id: "bjn-12", name: "Ngraho", population: 51_200, poorFamilies: 6_780, povertyRate: 21.7, scores: { personal: 70, social: 58, spatial: 76, structural: 62 }, trend: "improving", lastUpdated: "Feb 2026" },
   { id: "bjn-13", name: "Ngasem", population: 64_500, poorFamilies: 7_200, povertyRate: 19.0, scores: { personal: 63, social: 50, spatial: 56, structural: 54 }, trend: "improving", lastUpdated: "Feb 2026" },
   { id: "bjn-14", name: "Padangan", population: 53_880, poorFamilies: 5_640, povertyRate: 17.8, scores: { personal: 58, social: 46, spatial: 52, structural: 50 }, trend: "improving", lastUpdated: "Feb 2026" },
-  { id: "bjn-15", name: "Sukosewu", population: 40_110, poorFamilies: 5_920, povertyRate: 22.9, scores: { personal: 75, social: 60, spatial: 66, structural: 66 }, trend: "stable", lastUpdated: "Feb 2026" },
+  { id: "bjn-15", name: "Purwoharo", population: 40_110, poorFamilies: 5_920, povertyRate: 22.9, scores: { personal: 75, social: 60, spatial: 66, structural: 66 }, trend: "stable", lastUpdated: "Feb 2026" },
   { id: "bjn-16", name: "Baureno", population: 75_620, poorFamilies: 8_940, povertyRate: 20.2, scores: { personal: 66, social: 56, spatial: 58, structural: 60 }, trend: "improving", lastUpdated: "Feb 2026" },
   { id: "bjn-17", name: "Sugihwaras", population: 47_300, poorFamilies: 6_100, povertyRate: 21.5, scores: { personal: 70, social: 58, spatial: 64, structural: 62 }, trend: "stable", lastUpdated: "Feb 2026" },
   { id: "bjn-18", name: "Temayang", population: 38_950, poorFamilies: 5_480, povertyRate: 22.7, scores: { personal: 73, social: 60, spatial: 80, structural: 64 }, trend: "stable", lastUpdated: "Feb 2026" },

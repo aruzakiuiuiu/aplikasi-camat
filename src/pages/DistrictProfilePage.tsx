@@ -7,9 +7,8 @@ import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer, Tool
 import {
   ArrowLeft, Users, Home, TrendingDown, TrendingUp, Minus,
   GraduationCap, Briefcase, MapPin, AlertTriangle, Zap, Droplets,
-  ChevronRight, BarChart2, BookOpen, Building2, Map as MapIcon
+  ChevronRight, BarChart2, BookOpen, Building2
 } from "lucide-react";
-import VillageMap from "@/components/map/VillageMap";
 import PovertyDimensionTooltip from "@/components/dashboard/PovertyDimensionTooltip";
 import { DIMENSION_DEFINITIONS, getDistrictSubScores } from "@/data/povertyIndicators";
 
@@ -342,14 +341,6 @@ export default function DistrictProfilePage() {
                 <p className="text-sm text-foreground">{item}</p>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Village Map */}
-        <div>
-          <SectionTitle icon={<MapIcon className="h-4 w-4" />} title={`Peta Desa di Kecamatan ${district.name}`} />
-          <div className="dashboard-card p-3 h-[420px]">
-            <VillageMap districtId={district.id} />
           </div>
         </div>
 
