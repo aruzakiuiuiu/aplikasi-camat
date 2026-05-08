@@ -71,7 +71,7 @@ export default function VillageProfilePage() {
           <ChevronRight className="h-3 w-3" />
           <Link to={`/district/${district.id}`} className="hover:text-primary transition-colors">Kec. {district.name}</Link>
           <ChevronRight className="h-3 w-3" />
-          <span className="text-foreground font-medium">Desa {village.name}</span>
+          <span className="text-foreground font-medium">{village.isKelurahan ? "Kelurahan" : "Desa"} {village.name}</span>
         </nav>
       </div>
 
@@ -83,8 +83,8 @@ export default function VillageProfilePage() {
               <Home className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground">Desa · Kecamatan {district.name}</p>
-              <h1 className="text-xl font-bold text-foreground">Desa {village.name}</h1>
+              <p className="text-xs text-muted-foreground">{village.isKelurahan ? "Kelurahan" : "Desa"} · Kecamatan {district.name}</p>
+              <h1 className="text-xl font-bold text-foreground">{village.isKelurahan ? "Kelurahan" : "Desa"} {village.name}</h1>
             </div>
           </div>
 
