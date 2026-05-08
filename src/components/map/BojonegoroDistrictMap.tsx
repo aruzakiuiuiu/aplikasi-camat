@@ -55,11 +55,9 @@ export default function BojonegoroDistrictMap({ districtId, onSelectVillage }: P
   }, [districtId, kecamatanName]);
 
   const getDesaStyle = (feature?: GeoJSON.Feature): L.PathOptions => {
-    const desaName = feature?.properties?.DESA as string;
-    // Try to match with village app data for severity coloring
-    const village = villages.find(v =>
-      v.name.toLowerCase().includes(desaName?.toLowerCase()?.slice(0, 5) ?? "____")
-    );
+    const desaName = (feature?.properties?.DESA as string) ?? "";
+    // Exact name match against canonical villages list
+    const village = villages.find(v => v.name.toLowerCase() === desaName.toLowerCase());
     if (village) {
       const avg = (village.scores.personal + village.scores.social + village.scores.spatial + village.scores.structural) / 4;
       const sev = getSeverity(avg);

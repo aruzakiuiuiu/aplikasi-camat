@@ -47,7 +47,7 @@ export default function HouseholdListPage() {
           <ChevronRight className="h-3 w-3" />
           <Link to={`/district/${district.id}`} className="hover:text-primary transition-colors">Kec. {district.name}</Link>
           <ChevronRight className="h-3 w-3" />
-          <Link to={`/village/${village.id}`} className="hover:text-primary transition-colors">Desa {village.name}</Link>
+          <Link to={`/village/${village.id}`} className="hover:text-primary transition-colors">{village.isKelurahan ? "Kelurahan" : "Desa"} {village.name}</Link>
           <ChevronRight className="h-3 w-3" />
           <span className="text-foreground font-medium">Daftar Rumah Tangga Miskin</span>
         </nav>
@@ -61,7 +61,7 @@ export default function HouseholdListPage() {
               <Users className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground">Desa {village.name} · Kec. {district.name}</p>
+              <p className="text-xs text-muted-foreground">{village.isKelurahan ? "Kelurahan" : "Desa"} {village.name} · Kec. {district.name}</p>
               <h1 className="text-xl font-bold text-foreground">Daftar Rumah Tangga Miskin</h1>
               <p className="text-sm text-muted-foreground mt-0.5">{village.poorFamilies.toLocaleString("id-ID")} KK miskin terdaftar · Menampilkan {households.length} sampel data</p>
             </div>
@@ -157,7 +157,7 @@ export default function HouseholdListPage() {
         </div>
 
         <div className="text-center py-4 text-xs text-muted-foreground">
-          Data menampilkan {households.length} dari {village.poorFamilies.toLocaleString("id-ID")} KK miskin terdaftar di Desa {village.name}
+          Data menampilkan {households.length} dari {village.poorFamilies.toLocaleString("id-ID")} KK miskin terdaftar di {village.isKelurahan ? "Kelurahan" : "Desa"} {village.name}
         </div>
 
         <footer className="text-center py-4 text-xs text-muted-foreground border-t border-border">
