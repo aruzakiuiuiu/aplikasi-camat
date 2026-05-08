@@ -79,5 +79,6 @@ export const LEGEND_ITEMS = [
   { severity: "low" as const,    label: "Rendah (skor < 45)" },
 ] as const;
 
-// GeoJSON data source URL (served from public folder)
+// GeoJSON data source URLs (served from public folder)
+export const KECAMATAN_GEOJSON_URL = "/data/geojson/bojonegoro-kecamatan.geojson";
 export const DESA_GEOJSON_URL = "/data/geojson/bojonegoro-desa.geojson";

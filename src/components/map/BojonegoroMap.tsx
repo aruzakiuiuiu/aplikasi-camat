@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css";
 import { DISTRICTS, getSeverity } from "@/data/districts";
 import {
   BOJONEGORO_BOUNDS,
-  DESA_GEOJSON_URL,
+  KECAMATAN_GEOJSON_URL,
   KECAMATAN_TO_DISTRICT_ID,
   LEGEND_ITEMS,
   getSeverityFillColor,
@@ -27,64 +27,67 @@ export default function BojonegoroMap({ hoveredId, onHover }: Props) {
   const [geoData, setGeoData] = useState<GeoJSON.FeatureCollection | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Store ALL layers belonging to each district (many desa per kecamatan)
-  const layersByDistrictId = useRef<Record<string, L.Path[]>>({});
+  // Store layer for each kecamatan (one layer per kecamatan polygon)
+  const layersByDistrictId = useRef<Record<string, L.Path>>({});
 
   useEffect(() => {
-    fetch(DESA_GEOJSON_URL)
+    fetch(KECAMATAN_GEOJSON_URL)
       .then(r => r.json())
       .then((data: GeoJSON.FeatureCollection) => {
         setGeoData(data);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(err => {
+        console.error("Error loading GeoJSON:", err);
+        setLoading(false);
+      });
   }, []);
 
-  // Sync hover highlight from external source (e.g. priority list on the right)
+  // Sync hover highlight from external source (priority list on the right)
   useEffect(() => {
-    Object.entries(layersByDistrictId.current).forEach(([districtId, layers]) => {
+    Object.entries(layersByDistrictId.current).forEach(([districtId, layer]) => {
       const district = DISTRICTS.find(d => d.id === districtId);
       if (!district) return;
       const sev = getSeverity(avgScore(district.scores));
       const isHovered = hoveredId === districtId;
-      layers.forEach(layer => {
-        layer.setStyle({
-          fillColor: getSeverityFillColor(sev),
-          fillOpacity: isHovered ? 0.88 : 0.65,
-          color: getSeverityBorderColor(sev),
-          weight: isHovered ? 2.5 : 1.2,
-        });
-        if (isHovered) layer.bringToFront();
+      layer.setStyle({
+        fillColor: getSeverityFillColor(sev),
+        fillOpacity: isHovered ? 0.88 : 0.7,
+        color: getSeverityBorderColor(sev),
+        weight: isHovered ? 2.5 : 1.5,
       });
+      if (isHovered) layer.bringToFront();
     });
   }, [hoveredId]);
 
   const getBaseStyle = (feature?: GeoJSON.Feature): L.PathOptions => {
-    const kecamatanName = feature?.properties?.KECAMATAN as string;
+    // Kecamatan GeoJSON has "name" property for kecamatan name
+    const kecamatanName = feature?.properties?.name as string;
     const districtId = KECAMATAN_TO_DISTRICT_ID[kecamatanName];
     const district = DISTRICTS.find(d => d.id === districtId);
-    if (!district) return { fillColor: "#ccc", color: "#999", weight: 1, fillOpacity: 0.4 };
+
+    if (!district) {
+      return { fillColor: "#ccc", color: "#999", weight: 1.5, fillOpacity: 0.4 };
+    }
+
     const sev = getSeverity(avgScore(district.scores));
     return {
       fillColor: getSeverityFillColor(sev),
       color: getSeverityBorderColor(sev),
-      weight: 1.2,
-      fillOpacity: 0.65,
+      weight: 1.5,
+      fillOpacity: 0.7,
     };
   };
 
   const onEachFeature = (feature: GeoJSON.Feature, layer: L.Layer) => {
-    const kecamatanName = feature.properties?.KECAMATAN as string;
+    const kecamatanName = feature.properties?.name as string;
     const districtId = KECAMATAN_TO_DISTRICT_ID[kecamatanName];
     const district = DISTRICTS.find(d => d.id === districtId);
     const pathLayer = layer as L.Path;
 
-    // Accumulate all layers for this district
+    // Store layer for this kecamatan
     if (districtId) {
-      if (!layersByDistrictId.current[districtId]) {
-        layersByDistrictId.current[districtId] = [];
-      }
-      layersByDistrictId.current[districtId].push(pathLayer);
+      layersByDistrictId.current[districtId] = pathLayer;
     }
 
     pathLayer.on("mouseover", () => {
@@ -96,8 +99,8 @@ export default function BojonegoroMap({ hoveredId, onHover }: Props) {
       const sev = district ? getSeverity(avgScore(district.scores)) : "medium";
       pathLayer.setStyle({
         fillColor: getSeverityFillColor(sev),
-        fillOpacity: 0.65,
-        weight: 1.2,
+        fillOpacity: 0.7,
+        weight: 1.5,
       });
       onHover?.(null);
     });
@@ -106,11 +109,11 @@ export default function BojonegoroMap({ hoveredId, onHover }: Props) {
       if (districtId) navigate(`/district/${districtId}`);
     });
 
-    if (kecamatanName) {
-      const avg = district ? Math.round(avgScore(district.scores)) : 0;
-      const povertyRate = district?.povertyRate ?? 0;
+    if (kecamatanName && district) {
+      const avg = Math.round(avgScore(district.scores));
+      const povertyRate = district.povertyRate;
       pathLayer.bindTooltip(
-        `<div style="font-family:inherit;padding:2px 4px">
+        `<div style="font-family:inherit;padding:3px 5px">
           <strong>${kecamatanName}</strong><br/>
           Kemiskinan: ${povertyRate}% &nbsp;·&nbsp; Skor: ${avg}
         </div>`,
@@ -125,8 +128,16 @@ export default function BojonegoroMap({ hoveredId, onHover }: Props) {
         <div className="text-center">
           <div className="animate-spin h-6 w-6 border-2 border-primary border-t-transparent rounded-full mx-auto mb-2" />
           <p>Memuat peta Bojonegoro...</p>
-          <p className="text-xs mt-1 opacity-60">Mengunduh data batas administrasi</p>
+          <p className="text-xs mt-1 opacity-60">Batas administratif kecamatan</p>
         </div>
+      </div>
+    );
+  }
+
+  if (!geoData) {
+    return (
+      <div className="flex items-center justify-center w-full h-full text-sm text-muted-foreground">
+        <p>Gagal memuat data peta. Silakan refresh halaman.</p>
       </div>
     );
   }
@@ -141,16 +152,14 @@ export default function BojonegoroMap({ hoveredId, onHover }: Props) {
         scrollWheelZoom={true}
         style={{ zIndex: 0 }}
       >
-        {geoData && (
-          <GeoJSON
-            data={geoData}
-            style={getBaseStyle}
-            onEachFeature={onEachFeature}
-          />
-        )}
+        <GeoJSON
+          data={geoData}
+          style={getBaseStyle}
+          onEachFeature={onEachFeature}
+        />
       </MapContainer>
 
-      {/* Legend — positioned inside relative parent, outside MapContainer DOM */}
+      {/* Legend */}
       <div className="absolute bottom-4 left-4 bg-white/92 border border-gray-200 rounded-lg p-3 text-xs shadow-md pointer-events-none" style={{ zIndex: 9999 }}>
         <p className="font-bold text-gray-700 mb-2 uppercase tracking-wider text-[10px]">Tingkat Kemiskinan</p>
         {LEGEND_ITEMS.map(item => (
