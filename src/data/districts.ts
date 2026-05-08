@@ -48,10 +48,10 @@ export const DISTRICTS: District[] = [
 ];
 
 export const POVERTY_TYPES = [
-  { key: "personal" as const, label: "Personal & Keluarga", shortLabel: "Personal", color: "hsl(0 72% 54%)", bgClass: "stat-badge-personal", description: "Kemiskinan pada tingkat personal dan keluarga" },
-  { key: "social" as const, label: "Lingkungan Sosial", shortLabel: "Sosial", color: "hsl(200 72% 40%)", bgClass: "stat-badge-social", description: "Kemiskinan akibat kondisi lingkungan sosial" },
-  { key: "spatial" as const, label: "Kawasan (Spasial & Lingkungan Fisik)", shortLabel: "Kawasan", color: "hsl(34 90% 50%)", bgClass: "stat-badge-spatial", description: "Kemiskinan akibat kondisi kawasan, spasial dan lingkungan fisik" },
-  { key: "structural" as const, label: "Tata Kelola Struktural", shortLabel: "Struktural", color: "hsl(270 55% 50%)", bgClass: "stat-badge-structural", description: "Kemiskinan akibat tata kelola dan struktur pemerintahan" },
+  { key: "personal" as const, label: "Personal & Keluarga", shortLabel: "Personal", color: "#e5d8bd", bgClass: "stat-badge-personal", description: "Kemiskinan pada tingkat personal dan keluarga" },
+  { key: "social" as const, label: "Lingkungan Sosial", shortLabel: "Sosial", color: "#fed9a6", bgClass: "stat-badge-social", description: "Kemiskinan akibat kondisi lingkungan sosial" },
+  { key: "spatial" as const, label: "Kawasan (Spasial & Lingkungan Fisik)", shortLabel: "Kawasan", color: "#ccebc5", bgClass: "stat-badge-spatial", description: "Kemiskinan akibat kondisi kawasan, spasial dan lingkungan fisik" },
+  { key: "structural" as const, label: "Tata Kelola Struktural", shortLabel: "Struktural", color: "#decbe4", bgClass: "stat-badge-structural", description: "Kemiskinan akibat tata kelola dan struktur pemerintahan" },
 ];
 
 export function getRegencyStats() {
@@ -70,14 +70,47 @@ export function getRegencyStats() {
   return { total, totalPoor, totalPop, avgPovRate, improving, worsening, avgScores };
 }
 
-export function getSeverity(score: number): "high" | "medium" | "low" {
-  if (score >= 70) return "high";
-  if (score >= 45) return "medium";
-  return "low";
+export function getSeverity(score: number): "sangat-tinggi" | "tinggi" | "sedang" | "rendah" | "sangat-rendah" {
+  if (score >= 76) return "sangat-tinggi";
+  if (score >= 60) return "tinggi";
+  if (score >= 40) return "sedang";
+  if (score >= 20) return "rendah";
+  return "sangat-rendah";
 }
 
 export function getSeverityLabel(score: number) {
-  if (score >= 70) return "Tinggi";
-  if (score >= 45) return "Sedang";
-  return "Rendah";
+  if (score >= 76) return "Sangat Tinggi";
+  if (score >= 60) return "Tinggi";
+  if (score >= 40) return "Sedang";
+  if (score >= 20) return "Rendah";
+  return "Sangat Rendah";
+}
+
+// Helper function to get CSS class names for severity colors
+// Maps 5-level severity to visual severity groups for backward compatibility with CSS
+export function getSeverityColorClass(severity: "sangat-tinggi" | "tinggi" | "sedang" | "rendah" | "sangat-rendah"): {
+  text: string;
+  bg: string;
+  border: string;
+} {
+  const severityMap = {
+    "sangat-tinggi": { text: "text-severity-high", bg: "bg-severity-high/10", border: "border-severity-high/25" },
+    "tinggi": { text: "text-severity-high", bg: "bg-severity-high/10", border: "border-severity-high/25" },
+    "sedang": { text: "text-severity-medium", bg: "bg-severity-medium/10", border: "border-severity-medium/25" },
+    "rendah": { text: "text-severity-low", bg: "bg-severity-low/10", border: "border-severity-low/25" },
+    "sangat-rendah": { text: "text-severity-low", bg: "bg-severity-low/10", border: "border-severity-low/25" },
+  };
+  return severityMap[severity] || severityMap["sedang"];
+}
+
+// Helper function to get hex color for severity level
+export function getSeverityHexColor(severity: "sangat-tinggi" | "tinggi" | "sedang" | "rendah" | "sangat-rendah"): string {
+  const severityColorMap = {
+    "sangat-tinggi": "#d7191c",
+    "tinggi": "#fdae61",
+    "sedang": "#ffffbf",
+    "rendah": "#abdda4",
+    "sangat-rendah": "#2b83ba",
+  };
+  return severityColorMap[severity] || "#ffffbf";
 }

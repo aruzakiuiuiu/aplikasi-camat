@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel } from "@/data/districts";
+import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass } from "@/data/districts";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LineChart, Line, CartesianGrid, Legend,
   RadarChart, Radar, PolarGrid, PolarAngleAxis
@@ -59,7 +59,7 @@ const LOG_STATUS = {
 function ScorecardRow({ district }: { district: typeof DISTRICTS[0] }) {
   const avg = Math.round((district.scores.personal + district.scores.social + district.scores.spatial + district.scores.structural) / 4);
   const sev = getSeverity(avg);
-  const sevColor = sev === "high" ? "text-severity-high" : sev === "medium" ? "text-severity-medium" : "text-severity-low";
+  const sevColor = getSeverityColorClass(sev).text;
   const trendIcon = district.trend === "improving" ? <TrendingDown className="h-3 w-3 text-severity-low" /> : district.trend === "worsening" ? <TrendingUp className="h-3 w-3 text-severity-high" /> : <Minus className="h-3 w-3 text-severity-medium" />;
   
   // Mock performance score (0-100)

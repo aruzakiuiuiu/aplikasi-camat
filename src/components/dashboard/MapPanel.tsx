@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BojonegoroMap from "@/components/map/BojonegoroMap";
-import { DISTRICTS, getSeverity, getSeverityLabel, POVERTY_TYPES } from "@/data/districts";
+import { DISTRICTS, getSeverity, getSeverityLabel, getSeverityColorClass, POVERTY_TYPES } from "@/data/districts";
 import { TrendingDown, TrendingUp, Minus, MapPin, Users, AlertTriangle } from "lucide-react";
 
 const TREND_ICON = {
@@ -55,10 +55,11 @@ export default function MapPanel() {
                 {POVERTY_TYPES.map(pt => {
                   const score = hovered.scores[pt.key];
                   const sev = getSeverity(score);
+                  const sevClass = getSeverityColorClass(sev);
                   return (
                     <div key={pt.key} className="text-xs">
                       <span className="text-muted-foreground">{pt.shortLabel}: </span>
-                      <span className={`font-medium ${sev === "high" ? "text-severity-high" : sev === "medium" ? "text-severity-medium" : "text-severity-low"}`}>{score}</span>
+                      <span className={`font-medium ${sevClass.text}`}>{score}</span>
                     </div>
                   );
                 })}
@@ -101,9 +102,16 @@ export default function MapPanel() {
                     onMouseLeave={() => setHoveredId(null)}
                     className="w-full px-4 py-3 border-b border-border/50 flex items-start gap-3 hover:bg-muted/50 transition-colors text-left group"
                   >
-                    <span className={`mt-0.5 flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold text-white flex-shrink-0 ${sev === "high" ? "bg-severity-high" : "bg-severity-medium"}`}>
-                      {i + 1}
-                    </span>
+                    {(() => {
+                      const sevClass = getSeverityColorClass(sev);
+                      const bgColor = sev === "sangat-tinggi" || sev === "tinggi" ? "bg-severity-high" : "bg-severity-medium";
+                      return (
+                        <span className={`mt-0.5 flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold text-white flex-shrink-0 ${bgColor}`}>
+                          {i + 1}
+                        </span>
+                      );
+                    })()}
+
                     <div className="min-w-0 flex-1">
                       <p className="font-semibold text-sm text-foreground group-hover:text-primary truncate">{d.name}</p>
                       <p className="text-xs text-muted-foreground">

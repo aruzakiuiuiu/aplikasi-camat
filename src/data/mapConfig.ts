@@ -45,38 +45,38 @@ export const BOJONEGORO_BOUNDS: [[number, number], [number, number]] = [
 export const MAP_CENTER: [number, number] = [-7.09, 111.65];
 export const MAP_ZOOM = 10;
 
-// Fill colors for severity levels (matches existing design system)
+// Fill colors for severity levels (5 categories)
 export const SEVERITY_FILL: Record<string, string> = {
-  high:   "hsl(0, 72%, 54%)",
-  medium: "hsl(34, 90%, 50%)",
-  low:    "hsl(142, 60%, 42%)",
+  "sangat-tinggi": "#d7191c",
+  "tinggi":        "#fdae61",
+  "sedang":        "#ffffbf",
+  "rendah":        "#abdda4",
+  "sangat-rendah": "#2b83ba",
 };
 
 export const SEVERITY_BORDER: Record<string, string> = {
-  high:   "hsl(0, 72%, 35%)",
-  medium: "hsl(34, 90%, 32%)",
-  low:    "hsl(142, 60%, 28%)",
+  "sangat-tinggi": "#9e1318",
+  "tinggi":        "#d97e3b",
+  "sedang":        "#cccc99",
+  "rendah":        "#7fa377",
+  "sangat-rendah": "#1f5885",
 };
 
-export const SEVERITY_FILL_HOVER: Record<string, string> = {
-  high:   "hsl(0, 72%, 44%)",
-  medium: "hsl(34, 90%, 40%)",
-  low:    "hsl(142, 60%, 32%)",
-};
-
-export function getSeverityFillColor(severity: "high" | "medium" | "low"): string {
-  return SEVERITY_FILL[severity] ?? SEVERITY_FILL.medium;
+export function getSeverityFillColor(severity: "sangat-tinggi" | "tinggi" | "sedang" | "rendah" | "sangat-rendah"): string {
+  return SEVERITY_FILL[severity] ?? SEVERITY_FILL["sedang"];
 }
 
-export function getSeverityBorderColor(severity: "high" | "medium" | "low"): string {
-  return SEVERITY_BORDER[severity] ?? SEVERITY_BORDER.medium;
+export function getSeverityBorderColor(severity: "sangat-tinggi" | "tinggi" | "sedang" | "rendah" | "sangat-rendah"): string {
+  return SEVERITY_BORDER[severity] ?? SEVERITY_BORDER["sedang"];
 }
 
 // Legend items
 export const LEGEND_ITEMS = [
-  { severity: "high" as const,   label: "Tinggi (skor ≥ 70)" },
-  { severity: "medium" as const, label: "Sedang (skor 45–69)" },
-  { severity: "low" as const,    label: "Rendah (skor < 45)" },
+  { severity: "sangat-tinggi" as const, label: "Sangat Tinggi (skor ≥ 76)" },
+  { severity: "tinggi" as const,        label: "Tinggi (skor 60–75)" },
+  { severity: "sedang" as const,        label: "Sedang (skor 40–59)" },
+  { severity: "rendah" as const,        label: "Rendah (skor 20–39)" },
+  { severity: "sangat-rendah" as const, label: "Sangat Rendah (skor < 20)" },
 ] as const;
 
 // GeoJSON data source URLs (served from public folder)

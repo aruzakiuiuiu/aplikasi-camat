@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel } from "@/data/districts";
+import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass, getSeverityHexColor } from "@/data/districts";
 import { getDistrictProfile } from "@/data/districtProfiles";
 import { getVillagesByDistrict } from "@/data/villages";
 
@@ -111,10 +111,15 @@ export default function DistrictProfilePage() {
                   {TREND_ICON[district.trend]}
                   Tren: {TREND_LABEL[district.trend]}
                 </span>
-                <span className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-semibold border ${overallSeverity === "high" ? "bg-severity-high/10 text-severity-high border-severity-high/25" : overallSeverity === "medium" ? "bg-severity-medium/10 text-severity-medium border-severity-medium/25" : "bg-severity-low/10 text-severity-low border-severity-low/25"}`}>
-                  <AlertTriangle className="h-3.5 w-3.5" />
-                  Indeks: {avg} — {getSeverityLabel(avg)}
-                </span>
+                {(() => {
+                  const { bg, text, border } = getSeverityColorClass(overallSeverity);
+                  return (
+                    <span className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-semibold border ${bg} ${text} ${border}`}>
+                      <AlertTriangle className="h-3.5 w-3.5" />
+                      Indeks: {avg} — {getSeverityLabel(avg)}
+                    </span>
+                  );
+                })()}
               </div>
 
               {/* Diagnosis */}
@@ -156,7 +161,7 @@ export default function DistrictProfilePage() {
             {POVERTY_TYPES.map(pt => {
               const score = district.scores[pt.key];
               const sev = getSeverity(score);
-              const sevColor = sev === "high" ? "hsl(var(--severity-high))" : sev === "medium" ? "hsl(var(--severity-medium))" : "hsl(var(--severity-low))";
+              const sevColor = getSeverityHexColor(sev);
               return (
                 <PovertyDimensionTooltip key={pt.key} dimensionKey={pt.key} score={score} districtId={district.id} districtScores={district.scores}>
                   <div className="dashboard-card p-4">
@@ -300,7 +305,7 @@ export default function DistrictProfilePage() {
               const dimScore = district.scores[dim.key];
               const subScoresData = getDistrictSubScores(district.id, district.scores).dimensions[dim.key];
               const dimSev = getSeverity(dimScore);
-              const dimSevColor = dimSev === "high" ? "text-severity-high" : dimSev === "medium" ? "text-severity-medium" : "text-severity-low";
+              const dimSevColor = getSeverityColorClass(dimSev).text;
               return (
                 <div key={dim.key} className="dashboard-card p-4">
                   <div className="flex items-center justify-between mb-1">
@@ -312,14 +317,15 @@ export default function DistrictProfilePage() {
                     {dim.subCategories.map(sub => {
                       const subScore = subScoresData[sub.id];
                       const subSev = getSeverity(subScore);
+                      const subSevClass = getSeverityColorClass(subSev);
                       return (
                         <div key={sub.id}>
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-xs font-semibold text-foreground">{sub.label}</span>
-                            <span className={`text-xs font-bold mono ${subSev === "high" ? "text-severity-high" : subSev === "medium" ? "text-severity-medium" : "text-severity-low"}`}>{subScore}</span>
+                            <span className={`text-xs font-bold mono ${subSevClass.text}`}>{subScore}</span>
                           </div>
                           <div className="h-1.5 rounded-full bg-muted overflow-hidden">
-                            <div className={`h-full rounded-full ${subSev === "high" ? "bg-severity-high" : subSev === "medium" ? "bg-severity-medium" : "bg-severity-low"}`} style={{ width: `${subScore}%` }} />
+                            <div className={`h-full rounded-full ${subSevClass.bg.replace("/10", "")}`} style={{ width: `${subScore}%` }} />
                           </div>
                           <p className="text-[10px] text-muted-foreground mt-0.5">{sub.description}</p>
                         </div>
@@ -382,13 +388,14 @@ export default function DistrictProfilePage() {
                   {villages.map((v, i) => {
                     const avg = Math.round((v.scores.personal + v.scores.social + v.scores.spatial + v.scores.structural) / 4);
                     const sev = getSeverity(avg);
+                    const sevClass = getSeverityColorClass(sev);
                     return (
                       <tr key={v.id} className={`border-b border-border/50 hover:bg-muted/30 transition-colors ${i % 2 === 0 ? "" : "bg-muted/10"}`}>
                         <td className="px-4 py-3 font-medium text-foreground">{v.name}</td>
                         <td className="px-4 py-3 text-right text-muted-foreground">{v.population.toLocaleString("id-ID")}</td>
                         <td className="px-4 py-3 text-right font-semibold text-foreground">{v.poorFamilies.toLocaleString("id-ID")}</td>
                         <td className="px-4 py-3 text-right">
-                          <span className={`font-bold ${sev === "high" ? "text-severity-high" : sev === "medium" ? "text-severity-medium" : "text-severity-low"}`}>{v.povertyRate}%</span>
+                          <span className={`font-bold ${sevClass.text}`}>{v.povertyRate}%</span>
                         </td>
                         <td className="px-4 py-3">
                           <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${v.trend === "improving" ? "bg-severity-low/10 text-severity-low" : v.trend === "worsening" ? "bg-severity-high/10 text-severity-high" : "bg-severity-medium/10 text-severity-medium"}`}>

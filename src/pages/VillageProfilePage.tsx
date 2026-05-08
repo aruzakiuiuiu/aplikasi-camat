@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel } from "@/data/districts";
+import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass, getSeverityHexColor } from "@/data/districts";
 import { getVillageById } from "@/data/villages";
 import { generateHouseholds } from "@/data/villages";
 
@@ -45,8 +45,9 @@ export default function VillageProfilePage() {
 
   const avg = Math.round((village.scores.personal + village.scores.social + village.scores.spatial + village.scores.structural) / 4);
   const overallSeverity = getSeverity(avg);
-  const sevColor = overallSeverity === "high" ? "text-severity-high" : overallSeverity === "medium" ? "text-severity-medium" : "text-severity-low";
-  const sevBg = overallSeverity === "high" ? "bg-severity-high/10 border-severity-high/25 text-severity-high" : overallSeverity === "medium" ? "bg-severity-medium/10 border-severity-medium/25 text-severity-medium" : "bg-severity-low/10 border-severity-low/25 text-severity-low";
+  const severityClass = getSeverityColorClass(overallSeverity);
+  const sevColor = severityClass.text;
+  const sevBg = `${severityClass.bg} ${severityClass.text} ${severityClass.border}`;
 
   const conditionLabel = {
     sangat_miskin: "Sangat Miskin",
@@ -125,7 +126,7 @@ export default function VillageProfilePage() {
             {POVERTY_TYPES.map(pt => {
               const score = village.scores[pt.key];
               const sev = getSeverity(score);
-              const sevColor = sev === "high" ? "hsl(var(--severity-high))" : sev === "medium" ? "hsl(var(--severity-medium))" : "hsl(var(--severity-low))";
+              const sevColor = getSeverityHexColor(sev);
               return (
                 <div key={pt.key} className="dashboard-card p-3">
                   <div className="flex items-center gap-1.5 mb-2">

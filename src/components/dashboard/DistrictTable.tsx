@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { ChevronUp, ChevronDown, TrendingUp, TrendingDown, Minus, Search } from "lucide-react";
-import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel, type District } from "@/data/districts";
+import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass, type District } from "@/data/districts";
 
 type SortKey = "name" | "povertyRate" | "personal" | "social" | "spatial" | "structural";
 
 function ScoreCell({ score }: { score: number }) {
   const sev = getSeverity(score);
-  const bg = sev === "high" ? "bg-severity-high/10 text-severity-high" : sev === "medium" ? "bg-severity-medium/10 text-severity-medium" : "bg-severity-low/10 text-severity-low";
+  const sevClass = getSeverityColorClass(sev);
   return (
     <div className="flex items-center gap-1.5">
       <div className="flex-1 h-1.5 rounded-full bg-muted overflow-hidden w-12">
-        <div className={`h-full rounded-full ${sev === "high" ? "bg-severity-high" : sev === "medium" ? "bg-severity-medium" : "bg-severity-low"}`} style={{ width: `${score}%` }} />
+        <div className={`h-full rounded-full ${sevClass.bg.replace("/10", "")}`} style={{ width: `${score}%` }} />
       </div>
-      <span className={`text-xs font-semibold px-1.5 py-0.5 rounded ${bg} mono min-w-[32px] text-center`}>{score}</span>
+      <span className={`text-xs font-semibold px-1.5 py-0.5 rounded ${sevClass.bg} ${sevClass.text} mono min-w-[32px] text-center`}>{score}</span>
     </div>
   );
 }

@@ -45,14 +45,21 @@
     --nav-bg: 215 48% 14%;
     --nav-foreground: 200 40% 90%;
 
-    --poverty-personal: 0 72% 54%;
-    --poverty-social: 200 72% 40%;
-    --poverty-spatial: 34 90% 50%;
-    --poverty-structural: 270 55% 50%;
+    --poverty-personal: #e5d8bd;
+    --poverty-social: #fed9a6;
+    --poverty-spatial: #ccebc5;
+    --poverty-structural: #decbe4;
 
-    --severity-high: 0 72% 54%;
-    --severity-medium: 34 90% 50%;
-    --severity-low: 142 60% 42%;
+    --severity-sangat-tinggi: #d7191c;
+    --severity-tinggi: #fdae61;
+    --severity-sedang: #ffffbf;
+    --severity-rendah: #abdda4;
+    --severity-sangat-rendah: #2b83ba;
+
+    /* Legacy aliases for transition */
+    --severity-high: #d7191c;
+    --severity-medium: #ffffbf;
+    --severity-low: #abdda4;
 
     --gradient-header: linear-gradient(135deg, hsl(215 48% 14%), hsl(200 72% 28%));
     --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(210 20% 97%));
@@ -99,33 +106,27 @@
   }
 
   .stat-badge-personal {
-    background: hsl(var(--poverty-personal) / 0.1);
-    color: hsl(var(--poverty-personal));
-    border: 1px solid hsl(var(--poverty-personal) / 0.25);
+    background: color-mix(in srgb, var(--poverty-personal) 10%, white);
+    color: var(--poverty-personal);
+    border: 1px solid color-mix(in srgb, var(--poverty-personal) 25%, white);
   }
 
   .stat-badge-social {
-    background: hsl(var(--poverty-social) / 0.1);
-    color: hsl(var(--poverty-social));
-    border: 1px solid hsl(var(--poverty-social) / 0.25);
+    background: color-mix(in srgb, var(--poverty-social) 10%, white);
+    color: var(--poverty-social);
+    border: 1px solid color-mix(in srgb, var(--poverty-social) 25%, white);
   }
 
   .stat-badge-spatial {
-    background: hsl(var(--poverty-spatial) / 0.1);
-    color: hsl(var(--poverty-spatial));
-    border: 1px solid hsl(var(--poverty-spatial) / 0.25);
-  }
-
-  .stat-badge-social {
-    background: hsl(var(--poverty-social) / 0.1);
-    color: hsl(var(--poverty-social));
-    border: 1px solid hsl(var(--poverty-social) / 0.25);
+    background: color-mix(in srgb, var(--poverty-spatial) 10%, white);
+    color: var(--poverty-spatial);
+    border: 1px solid color-mix(in srgb, var(--poverty-spatial) 25%, white);
   }
 
   .stat-badge-structural {
-    background: hsl(var(--poverty-structural) / 0.1);
-    color: hsl(var(--poverty-structural));
-    border: 1px solid hsl(var(--poverty-structural) / 0.25);
+    background: color-mix(in srgb, var(--poverty-structural) 10%, white);
+    color: var(--poverty-structural);
+    border: 1px solid color-mix(in srgb, var(--poverty-structural) 25%, white);
   }
 
   .severity-high { color: hsl(var(--severity-high)); }

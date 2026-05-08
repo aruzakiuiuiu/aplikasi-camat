@@ -1,5 +1,5 @@
 import { DIMENSION_DEFINITIONS, getDimensionByKey, getDistrictSubScores } from "@/data/povertyIndicators";
-import { getSeverity } from "@/data/districts";
+import { getSeverity, getSeverityLabel, getSeverityColorClass } from "@/data/districts";
 import {
   HoverCard,
   HoverCardContent,
@@ -30,8 +30,8 @@ export default function PovertyDimensionTooltip({
     : null;
 
   const sev = getSeverity(score);
-  const sevLabel = score >= 70 ? "Tinggi" : score >= 45 ? "Sedang" : "Rendah";
-  const sevColor = sev === "high" ? "text-severity-high" : sev === "medium" ? "text-severity-medium" : "text-severity-low";
+  const sevLabel = getSeverityLabel(score);
+  const sevColor = getSeverityColorClass(sev).text;
 
   return (
     <HoverCard openDelay={200} closeDelay={100}>
@@ -59,20 +59,28 @@ export default function PovertyDimensionTooltip({
               <div key={sub.id}>
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs font-semibold text-foreground">{sub.label}</span>
-                  {subScore !== undefined && (
-                    <span className={`text-xs font-bold mono ${getSeverity(subScore) === "high" ? "text-severity-high" : getSeverity(subScore) === "medium" ? "text-severity-medium" : "text-severity-low"}`}>
-                      {subScore}
-                    </span>
-                  )}
+                  {subScore !== undefined && (() => {
+                    const subSev = getSeverity(subScore);
+                    const subSevClass = getSeverityColorClass(subSev);
+                    return (
+                      <span className={`text-xs font-bold mono ${subSevClass.text}`}>
+                        {subScore}
+                      </span>
+                    );
+                  })()}
                 </div>
-                {subScore !== undefined && (
-                  <div className="h-1 rounded-full bg-muted overflow-hidden mb-1">
-                    <div
-                      className={`h-full rounded-full ${getSeverity(subScore) === "high" ? "bg-severity-high" : getSeverity(subScore) === "medium" ? "bg-severity-medium" : "bg-severity-low"}`}
-                      style={{ width: `${subScore}%` }}
-                    />
-                  </div>
-                )}
+                {subScore !== undefined && (() => {
+                  const subSev = getSeverity(subScore);
+                  const subSevClass = getSeverityColorClass(subSev);
+                  return (
+                    <div className="h-1 rounded-full bg-muted overflow-hidden mb-1">
+                      <div
+                        className={`h-full rounded-full ${subSevClass.bg.replace("/10", "")}`}
+                        style={{ width: `${subScore}%` }}
+                      />
+                    </div>
+                  );
+                })()}
                 <div className="space-y-0.5">
                   {sub.indicators.map(ind => (
                     <p key={ind.id} className="text-[10px] text-muted-foreground pl-2 border-l border-border/50">
