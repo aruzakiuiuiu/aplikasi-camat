@@ -364,13 +364,13 @@ export default function DistrictProfilePage() {
 
         {/* Villages */}
         <div>
-          <SectionTitle icon={<Building2 className="h-4 w-4" />} title={`Sebaran Kemiskinan per Desa (${villages.length} desa)`} />
+          <SectionTitle icon={<Building2 className="h-4 w-4" />} title={`Sebaran Kemiskinan per Desa/Kelurahan (${villages.length})`} />
           <div className="dashboard-card overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-muted/40">
-                    <th className="px-4 py-2.5 text-left text-xs font-bold uppercase tracking-wider text-muted-foreground">Desa</th>
+                    <th className="px-4 py-2.5 text-left text-xs font-bold uppercase tracking-wider text-muted-foreground">Desa / Kelurahan</th>
                     <th className="px-4 py-2.5 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">Penduduk</th>
                     <th className="px-4 py-2.5 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">KK Miskin</th>
                     <th className="px-4 py-2.5 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">% Miskin</th>
@@ -384,7 +384,10 @@ export default function DistrictProfilePage() {
                     const sev = getSeverity(avg);
                     return (
                       <tr key={v.id} className={`border-b border-border/50 hover:bg-muted/30 transition-colors ${i % 2 === 0 ? "" : "bg-muted/10"}`}>
-                        <td className="px-4 py-3 font-medium text-foreground">{v.name}</td>
+                        <td className="px-4 py-3 font-medium text-foreground">
+                          {v.isKelurahan && <span className="inline-block mr-1.5 px-1.5 py-0.5 rounded text-[10px] font-bold bg-primary/10 text-primary border border-primary/20">KEL</span>}
+                          {v.name}
+                        </td>
                         <td className="px-4 py-3 text-right text-muted-foreground">{v.population.toLocaleString("id-ID")}</td>
                         <td className="px-4 py-3 text-right font-semibold text-foreground">{v.poorFamilies.toLocaleString("id-ID")}</td>
                         <td className="px-4 py-3 text-right">
