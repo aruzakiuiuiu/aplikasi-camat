@@ -1,8 +1,6 @@
-import { TrendingDown, TrendingUp, Minus, Users, Globe, Network, Building2 } from "lucide-react";
+import { TrendingDown, TrendingUp } from "lucide-react";
 import { getRegencyStats, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass } from "@/data/districts";
 import PovertyDimensionTooltip from "./PovertyDimensionTooltip";
-
-const icons = [Users, Network, Globe, Building2];
 
 export default function SummaryCards() {
   const stats = getRegencyStats();
@@ -58,28 +56,30 @@ export default function SummaryCards() {
         <p className="text-xs text-muted-foreground -mt-1 mb-4">Rata-rata indeks per domain · Skala 1–5 (1 = sangat rendah, 5 = sangat tinggi) · Arahkan kursor ke kartu untuk detail</p>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
         {POVERTY_TYPES.map((type, i) => {
-          const Icon = icons[i];
           const score = stats.avgScores[type.key];
           const sev = getSeverity(score);
           const severity = getSeverityLabel(score);
           const severityColor = getSeverityColorClass(sev).text;
           const pct = ((score - 1) / 4) * 100;
+          const labelColor = `color-mix(in srgb, ${type.color} 60%, #1a0f00)`;
           return (
             <PovertyDimensionTooltip key={type.key} dimensionKey={type.key} score={score} className="h-full">
-              <div className="dashboard-card p-4 h-full flex flex-col">
-                <div className="flex items-center justify-between mb-3">
-                  <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-semibold ${type.bgClass}`}>
-                    <Icon className="h-3 w-3" />
-                    {type.shortLabel}
-                  </span>
-                  <span className={`text-xs font-bold ${severityColor}`}>{severity}</span>
-                </div>
+              <div
+                className="dashboard-card p-4 h-full flex flex-col"
+                style={{ backgroundColor: `color-mix(in srgb, ${type.color} 25%, white)` }}
+              >
+                <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: labelColor }}>
+                  {type.label}
+                </p>
                 <p className="text-2xl font-bold text-foreground mb-1">{score}<span className="text-sm font-normal text-muted-foreground">/5</span></p>
-                <p className="text-[11px] text-muted-foreground mb-2">{type.label}</p>
-                <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden mt-auto">
+                <p className={`text-xs font-semibold mb-3 ${severityColor}`}>{severity}</p>
+                <div
+                  className="h-1.5 w-full rounded-full overflow-hidden mt-auto"
+                  style={{ backgroundColor: `color-mix(in srgb, ${type.color} 30%, white)` }}
+                >
                   <div
                     className="h-full rounded-full transition-all"
-                    style={{ width: `${pct}%`, backgroundColor: type.color }}
+                    style={{ width: `${pct}%`, backgroundColor: `color-mix(in srgb, ${type.color} 70%, #1a0f00)` }}
                   />
                 </div>
               </div>
