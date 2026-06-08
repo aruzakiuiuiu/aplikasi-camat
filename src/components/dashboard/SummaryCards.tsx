@@ -78,7 +78,7 @@ export default function SummaryCards() {
                 >
                   <div
                     className="h-full rounded-full transition-all"
-                    style={{ width: `${pct}%`, backgroundColor: getSeverityHexColor(sev) }}
+                    style={{ width: `${pct}%`, backgroundColor: sev === "sedang" ? "#c8a900" : getSeverityHexColor(sev) }}
                   />
                 </div>
               </div>
