@@ -18,9 +18,9 @@ function ScoreCell({ score }: { score: number }) {
 }
 
 function TrendBadge({ trend }: { trend: District["trend"] }) {
-  if (trend === "improving") return <span className="flex items-center gap-1 text-xs font-semibold text-severity-low"><TrendingDown className="h-3 w-3" />Membaik</span>;
-  if (trend === "worsening") return <span className="flex items-center gap-1 text-xs font-semibold text-severity-high"><TrendingUp className="h-3 w-3" />Memburuk</span>;
-  return <span className="flex items-center gap-1 text-xs font-semibold text-muted-foreground"><Minus className="h-3 w-3" />Stabil</span>;
+  if (trend === "improving") return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold border bg-severity-low/10 text-severity-low border-severity-low/25"><TrendingDown className="h-3 w-3" />Membaik</span>;
+  if (trend === "worsening") return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold border bg-severity-high/10 text-severity-high border-severity-high/25"><TrendingUp className="h-3 w-3" />Memburuk</span>;
+  return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold border bg-muted text-muted-foreground border-border"><Minus className="h-3 w-3" />Stabil</span>;
 }
 
 export default function DistrictTable() {
