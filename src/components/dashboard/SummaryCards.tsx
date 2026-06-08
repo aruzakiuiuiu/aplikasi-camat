@@ -1,5 +1,5 @@
 import { TrendingDown, TrendingUp, Minus, Users, Globe, Network, Building2 } from "lucide-react";
-import { getRegencyStats, POVERTY_TYPES } from "@/data/districts";
+import { getRegencyStats, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass } from "@/data/districts";
 import PovertyDimensionTooltip from "./PovertyDimensionTooltip";
 
 const icons = [Users, Network, Globe, Building2];
@@ -47,8 +47,9 @@ export default function SummaryCards() {
         {POVERTY_TYPES.map((type, i) => {
           const Icon = icons[i];
           const score = stats.avgScores[type.key];
-          const severity = score >= 70 ? "Tinggi" : score >= 45 ? "Sedang" : "Rendah";
-          const severityColor = score >= 70 ? "text-severity-high" : score >= 45 ? "text-severity-medium" : "text-severity-low";
+          const sev = getSeverity(score);
+          const severity = getSeverityLabel(score);
+          const severityColor = getSeverityColorClass(sev).text;
           const pct = score;
           return (
             <PovertyDimensionTooltip key={type.key} dimensionKey={type.key} score={score}>

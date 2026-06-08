@@ -1,8 +1,8 @@
 export type PovertyScale = {
-  personal: number;      // 0–100 index (higher = worse) — Personal & Keluarga
-  social: number;        // Lingkungan Sosial
-  spatial: number;       // Kawasan (Spasial & Lingkungan Fisik)
-  structural: number;    // Tata Kelola Struktural
+  personal: number;      // 0–100 index (higher = worse) — Domain Personal-Keluarga
+  social: number;        // Domain Sosial-Ekonomi Lokal
+  spatial: number;       // Domain Kawasan-Lingkungan
+  structural: number;    // Domain Sistem-Kelembagaan
 };
 
 export type District = {
@@ -48,10 +48,10 @@ export const DISTRICTS: District[] = [
 ];
 
 export const POVERTY_TYPES = [
-  { key: "personal" as const, label: "Personal & Keluarga", shortLabel: "Personal", color: "#e5d8bd", bgClass: "stat-badge-personal", description: "Kemiskinan pada tingkat personal dan keluarga" },
-  { key: "social" as const, label: "Lingkungan Sosial", shortLabel: "Sosial", color: "#fed9a6", bgClass: "stat-badge-social", description: "Kemiskinan akibat kondisi lingkungan sosial" },
-  { key: "spatial" as const, label: "Kawasan (Spasial & Lingkungan Fisik)", shortLabel: "Kawasan", color: "#ccebc5", bgClass: "stat-badge-spatial", description: "Kemiskinan akibat kondisi kawasan, spasial dan lingkungan fisik" },
-  { key: "structural" as const, label: "Tata Kelola Struktural", shortLabel: "Struktural", color: "#decbe4", bgClass: "stat-badge-structural", description: "Kemiskinan akibat tata kelola dan struktur pemerintahan" },
+  { key: "personal" as const, label: "Domain Personal-Keluarga", shortLabel: "Personal", color: "#e5d8bd", bgClass: "stat-badge-personal", description: "Kondisi individu dan rumah tangga yang mempengaruhi kapasitas keluar dari jerat kemiskinan" },
+  { key: "social" as const, label: "Domain Sosial-Ekonomi Lokal", shortLabel: "Sosial", color: "#fed9a6", bgClass: "stat-badge-social", description: "Nilai budaya, pola hubungan sosial, dan struktur ekonomi lokal yang mempengaruhi pemerataan kesejahteraan" },
+  { key: "spatial" as const, label: "Domain Kawasan-Lingkungan", shortLabel: "Kawasan", color: "#ccebc5", bgClass: "stat-badge-spatial", description: "Kondisi geografis, daya dukung lingkungan, dan infrastruktur fisik yang menciptakan kerentanan" },
+  { key: "structural" as const, label: "Domain Sistem-Kelembagaan", shortLabel: "Sistem", color: "#decbe4", bgClass: "stat-badge-structural", description: "Struktur kebijakan, tata kelola pemerintahan, dan sinergi lintas sektor penanggulangan kemiskinan" },
 ];
 
 export function getRegencyStats() {

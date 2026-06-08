@@ -11,7 +11,7 @@ function PovertyTypeRadar() {
 
   return (
     <div className="dashboard-card p-5">
-      <h3 className="font-bold text-foreground text-sm mb-1">Rata-rata Indeks Per Skala Kemiskinan</h3>
+      <h3 className="font-bold text-foreground text-sm mb-1">Rata-rata Indeks Per Domain Kemiskinan</h3>
       <p className="text-xs text-muted-foreground mb-4">Kabupaten Bojonegoro</p>
       <ResponsiveContainer width="100%" height={220}>
         <RadarChart data={data} cx="50%" cy="50%" outerRadius="75%">
@@ -62,7 +62,7 @@ function PovertyTypesComparison() {
 
   return (
     <div className="dashboard-card p-5">
-      <h3 className="font-bold text-foreground text-sm mb-1">Perbandingan Skala Kemiskinan</h3>
+      <h3 className="font-bold text-foreground text-sm mb-1">Perbandingan Domain Kemiskinan</h3>
       <p className="text-xs text-muted-foreground mb-4">8 kecamatan dengan kemiskinan tertinggi</p>
       <div className="flex flex-wrap gap-3 mb-3">
         {POVERTY_TYPES.map(t => (
@@ -77,10 +77,10 @@ function PovertyTypesComparison() {
           <XAxis dataKey="name" tick={{ fontSize: 10, fill: "hsl(215 20% 48%)" }} />
           <YAxis domain={[0, 100]} tick={{ fontSize: 10, fill: "hsl(215 20% 48%)" }} />
           <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
-          <Bar dataKey="personal" name="Personal" fill="hsl(0 72% 54%)" radius={[2, 2, 0, 0]} />
-          <Bar dataKey="social" name="Sosial" fill="hsl(200 72% 40%)" radius={[2, 2, 0, 0]} />
-          <Bar dataKey="spatial" name="Kawasan" fill="hsl(34 90% 50%)" radius={[2, 2, 0, 0]} />
-          <Bar dataKey="structural" name="Struktural" fill="hsl(270 55% 50%)" radius={[2, 2, 0, 0]} />
+          <Bar dataKey="personal" name="Personal" fill="#e5d8bd" radius={[2, 2, 0, 0]} />
+          <Bar dataKey="social" name="Sosial" fill="#fed9a6" radius={[2, 2, 0, 0]} />
+          <Bar dataKey="spatial" name="Kawasan" fill="#ccebc5" radius={[2, 2, 0, 0]} />
+          <Bar dataKey="structural" name="Sistem" fill="#decbe4" radius={[2, 2, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

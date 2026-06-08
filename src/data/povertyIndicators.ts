@@ -19,15 +19,17 @@ export type DimensionDefinition = {
   label: string;
   shortLabel: string;
   focus: string;
+  rootCause: string;
   subCategories: SubCategory[];
 };
 
 export const DIMENSION_DEFINITIONS: DimensionDefinition[] = [
   {
     key: "personal",
-    label: "Personal & Keluarga",
+    label: "Personal-Keluarga",
     shortLabel: "Personal",
-    focus: "Kondisi individu & rumah tangga yang mempengaruhi kemampuan keluar dari kemiskinan",
+    focus: "Kondisi individu dan rumah tangga yang mempengaruhi kapasitas mereka untuk keluar dari jerat kemiskinan, mencakup aspek kesehatan, pendidikan, serta ketahanan ekonomi keluarga.",
+    rootCause: "Ketidakmampuan struktural dan keterbatasan kapasitas internal yang menghambat keluarga dalam mengakses peluang dan meningkatkan taraf hidup.",
     subCategories: [
       {
         id: "a1", label: "Kesehatan Keluarga", description: "Kondisi kesehatan rumah tangga",
@@ -70,9 +72,10 @@ export const DIMENSION_DEFINITIONS: DimensionDefinition[] = [
   },
   {
     key: "social",
-    label: "Lingkungan Sosial",
+    label: "Sosial-Ekonomi Lokal",
     shortLabel: "Sosial",
-    focus: "Nilai, pola hubungan, struktur ekonomi, dan kekuatan sosial yang mempengaruhi partisipasi dan perubahan",
+    focus: "Nilai budaya, pola hubungan sosial, dan struktur ekonomi lokal yang mempengaruhi partisipasi masyarakat, kesempatan kerja, serta pemerataan kesejahteraan.",
+    rootCause: "Hambatan sosio-kultural dan inefisiensi ekosistem ekonomi lokal yang merintangi mobilitas sosial dan menghambat graduasi kemiskinan.",
     subCategories: [
       {
         id: "b1", label: "Sosial Budaya", description: "Nilai, pola hubungan, kekuatan sosial",
@@ -99,9 +102,10 @@ export const DIMENSION_DEFINITIONS: DimensionDefinition[] = [
   },
   {
     key: "spatial",
-    label: "Kawasan (Spasial & Lingkungan Fisik)",
+    label: "Kawasan-Lingkungan",
     shortLabel: "Kawasan",
-    focus: "Kondisi geografis, infrastruktur fisik, dan risiko lingkungan",
+    focus: "Kondisi geografis, daya dukung lingkungan, dan infrastruktur fisik yang menciptakan kerentanan atau membatasi ruang gerak ekonomi.",
+    rootCause: "Isolasi spasial dan keterbatasan daya dukung lingkungan/infrastruktur yang menutup akses masyarakat terhadap layanan dasar dan peluang ekonomi.",
     subCategories: [
       {
         id: "c1", label: "Aksesibilitas Fisik", description: "Keterjangkauan wilayah",
@@ -149,9 +153,10 @@ export const DIMENSION_DEFINITIONS: DimensionDefinition[] = [
   },
   {
     key: "structural",
-    label: "Tata Kelola Struktural",
-    shortLabel: "Struktural",
-    focus: "Struktur program, koordinasi lintas sektor, dan sistem kebijakan",
+    label: "Sistem-Kelembagaan",
+    shortLabel: "Sistem",
+    focus: "Struktur kebijakan, tata kelola pemerintahan, manajemen data, dan sinergi lintas sektor dalam menjalankan program penanggulangan kemiskinan.",
+    rootCause: "Fragmentasi tata kelola, kelemahan data, dan inefisiensi kelembagaan yang menyebabkan intervensi pengentasan kemiskinan bersifat parsial, berulang, dan tidak tuntas.",
     subCategories: [
       {
         id: "d1", label: "Koordinasi Lintas Dinas", description: "Sinergi program antar OPD",

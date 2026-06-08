@@ -121,7 +121,7 @@ export default function VillageProfilePage() {
 
         {/* 4 Scores */}
         <div>
-          <SectionTitle icon={<AlertTriangle className="h-4 w-4" />} title="4 Dimensi Kemiskinan" />
+          <SectionTitle icon={<AlertTriangle className="h-4 w-4" />} title="4 Domain Kemiskinan" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {POVERTY_TYPES.map(pt => {
               const score = village.scores[pt.key];

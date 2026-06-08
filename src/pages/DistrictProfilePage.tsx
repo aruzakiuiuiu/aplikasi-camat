@@ -156,7 +156,7 @@ export default function DistrictProfilePage() {
 
         {/* 4 Poverty Scores */}
         <div>
-          <SectionTitle icon={<BarChart2 className="h-4 w-4" />} title="Skor 4 Dimensi Kemiskinan" />
+          <SectionTitle icon={<BarChart2 className="h-4 w-4" />} title="Skor 4 Domain Kemiskinan" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {POVERTY_TYPES.map(pt => {
               const score = district.scores[pt.key];
@@ -299,7 +299,7 @@ export default function DistrictProfilePage() {
 
         {/* Detailed Sub-Indicator Breakdown */}
         <div>
-          <SectionTitle icon={<BarChart2 className="h-4 w-4" />} title="Breakdown Sub-Indikator per Dimensi" />
+          <SectionTitle icon={<BarChart2 className="h-4 w-4" />} title="Breakdown Sub-Indikator per Domain" />
           <div className="grid md:grid-cols-2 gap-4">
             {DIMENSION_DEFINITIONS.map(dim => {
               const dimScore = district.scores[dim.key];

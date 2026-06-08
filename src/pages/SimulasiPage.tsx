@@ -19,11 +19,11 @@ const INTERVENTIONS = [
   { id: "int-5", name: "KUR & Pemberdayaan Ekonomi", category: "Sosial", impacts: { personal: -6, social: -5, spatial: -1, structural: -8 }, cost: "Rp 10jt/KK", timeframe: "6–24 bulan", targetDimension: "Akses ekonomi, peluang ekonomi lokal" },
   { id: "int-6", name: "Sanitasi Total Berbasis Masyarakat", category: "Kawasan", impacts: { personal: -5, social: -8, spatial: -12, structural: -4 }, cost: "Rp 15jt/desa", timeframe: "3–12 bulan", targetDimension: "Sanitasi, infrastruktur lingkungan" },
   { id: "int-7", name: "Peningkatan Kualitas Pendidikan", category: "Personal", impacts: { personal: -10, social: -7, spatial: 0, structural: -5 }, cost: "Rp 50jt/sekolah/thn", timeframe: "12–36 bulan", targetDimension: "Pendidikan & literasi, produktivitas" },
-  { id: "int-8", name: "Penguatan Tata Kelola Desa", category: "Struktural", impacts: { personal: -2, social: -3, spatial: -2, structural: -14 }, cost: "Rp 25jt/desa/thn", timeframe: "6–18 bulan", targetDimension: "Kapasitas kelembagaan, koordinasi" },
+  { id: "int-8", name: "Penguatan Tata Kelola Desa", category: "Sistem", impacts: { personal: -2, social: -3, spatial: -2, structural: -14 }, cost: "Rp 25jt/desa/thn", timeframe: "6–18 bulan", targetDimension: "Kapasitas kelembagaan, koordinasi" },
   { id: "int-9", name: "Diversifikasi Pertanian", category: "Sosial", impacts: { personal: -7, social: -4, spatial: -6, structural: -3 }, cost: "Rp 8jt/KK", timeframe: "6–24 bulan", targetDimension: "Mata pencaharian, struktur ekonomi" },
   { id: "int-10", name: "Mitigasi Bencana & Adaptasi Iklim", category: "Kawasan", impacts: { personal: -1, social: -3, spatial: -18, structural: -6 }, cost: "Rp 200jt/desa", timeframe: "12–36 bulan", targetDimension: "Kondisi geografis, risiko bencana" },
   { id: "int-11", name: "Pemberdayaan Perempuan & Kesetaraan", category: "Sosial", impacts: { personal: -5, social: -10, spatial: 0, structural: -4 }, cost: "Rp 12jt/kelompok", timeframe: "6–18 bulan", targetDimension: "Peran perempuan, modal sosial" },
-  { id: "int-12", name: "Integrasi Data & Sistem Informasi", category: "Struktural", impacts: { personal: -1, social: -2, spatial: -1, structural: -12 }, cost: "Rp 50jt/sistem", timeframe: "6–12 bulan", targetDimension: "Integrasi data, efektivitas kebijakan" },
+  { id: "int-12", name: "Integrasi Data & Sistem Informasi", category: "Sistem", impacts: { personal: -1, social: -2, spatial: -1, structural: -12 }, cost: "Rp 50jt/sistem", timeframe: "6–12 bulan", targetDimension: "Integrasi data, efektivitas kebijakan" },
 ];
 
 export default function SimulasiPage() {
@@ -268,7 +268,7 @@ export default function SimulasiPage() {
 
                   {/* Radar comparison */}
                   <div className="mb-3">
-                    <p className="text-xs font-semibold text-muted-foreground mb-2">Perbandingan 4 Dimensi</p>
+                    <p className="text-xs font-semibold text-muted-foreground mb-2">Perbandingan 4 Domain</p>
                     <ResponsiveContainer width="100%" height={200}>
                       <RadarChart data={radarData}>
                         <PolarGrid stroke="hsl(210 20% 87%)" />

@@ -51,6 +51,12 @@ export default function PovertyDimensionTooltip({
             <span className={`text-xs font-semibold ${sevColor}`}>({sevLabel})</span>
           </div>
           <p className="text-[10px] text-muted-foreground mt-1 italic">0 = kondisi ideal · 100 = kemiskinan ekstrem</p>
+          {dimension.rootCause && (
+            <div className="mt-2 pt-2 border-t border-border/50">
+              <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wide mb-0.5">Akar Masalah:</p>
+              <p className="text-[10px] text-foreground/80 italic leading-relaxed">{dimension.rootCause}</p>
+            </div>
+          )}
         </div>
         <div className="p-3 space-y-2 max-h-64 overflow-y-auto">
           {dimension.subCategories.map(sub => {
