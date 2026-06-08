@@ -56,7 +56,7 @@ export default function SummaryCards() {
           <div className="flex-1 h-px bg-border" />
         </div>
         <p className="text-xs text-muted-foreground -mt-1 mb-4">Rata-rata indeks per domain · Skala 1–5 (1 = sangat rendah, 5 = sangat tinggi) · Arahkan kursor ke kartu untuk detail</p>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
         {POVERTY_TYPES.map((type, i) => {
           const Icon = icons[i];
           const score = stats.avgScores[type.key];
@@ -65,8 +65,8 @@ export default function SummaryCards() {
           const severityColor = getSeverityColorClass(sev).text;
           const pct = ((score - 1) / 4) * 100;
           return (
-            <PovertyDimensionTooltip key={type.key} dimensionKey={type.key} score={score}>
-              <div className="dashboard-card p-4">
+            <PovertyDimensionTooltip key={type.key} dimensionKey={type.key} score={score} className="h-full">
+              <div className="dashboard-card p-4 h-full flex flex-col">
                 <div className="flex items-center justify-between mb-3">
                   <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-semibold ${type.bgClass}`}>
                     <Icon className="h-3 w-3" />
@@ -76,7 +76,7 @@ export default function SummaryCards() {
                 </div>
                 <p className="text-2xl font-bold text-foreground mb-1">{score}<span className="text-sm font-normal text-muted-foreground">/5</span></p>
                 <p className="text-[11px] text-muted-foreground mb-2">{type.label}</p>
-                <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
+                <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden mt-auto">
                   <div
                     className="h-full rounded-full transition-all"
                     style={{ width: `${pct}%`, backgroundColor: type.color }}

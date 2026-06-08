@@ -13,6 +13,7 @@ interface PovertyDimensionTooltipProps {
   districtId?: string;
   districtScores?: { personal: number; social: number; spatial: number; structural: number };
   children: React.ReactNode;
+  className?: string;
 }
 
 export default function PovertyDimensionTooltip({
@@ -21,6 +22,7 @@ export default function PovertyDimensionTooltip({
   districtId,
   districtScores,
   children,
+  className,
 }: PovertyDimensionTooltipProps) {
   const dimension = getDimensionByKey(dimensionKey);
   if (!dimension) return <>{children}</>;
@@ -36,7 +38,7 @@ export default function PovertyDimensionTooltip({
   return (
     <HoverCard openDelay={200} closeDelay={100}>
       <HoverCardTrigger asChild>
-        <div className="cursor-help">{children}</div>
+        <div className={`cursor-help${className ? ` ${className}` : ""}`}>{children}</div>
       </HoverCardTrigger>
       <HoverCardContent className="w-80 p-0" side="top" align="start">
         <div className="p-3 border-b border-border bg-muted/30">
