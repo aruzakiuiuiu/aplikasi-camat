@@ -1,5 +1,5 @@
 import { TrendingDown, TrendingUp } from "lucide-react";
-import { getRegencyStats, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass } from "@/data/districts";
+import { getRegencyStats, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass, getSeverityHexColor } from "@/data/districts";
 import PovertyDimensionTooltip from "./PovertyDimensionTooltip";
 
 export default function SummaryCards() {
@@ -74,12 +74,11 @@ export default function SummaryCards() {
                 <p className="text-2xl font-bold text-foreground mb-1">{score}<span className="text-sm font-normal text-muted-foreground">/5</span></p>
                 <p className={`text-xs font-semibold mb-3 ${severityColor}`}>{severity}</p>
                 <div
-                  className="h-1.5 w-full rounded-full overflow-hidden mt-auto"
-                  style={{ backgroundColor: `color-mix(in srgb, ${type.color} 30%, white)` }}
+                  className="h-1.5 w-full rounded-full overflow-hidden mt-auto bg-gray-200"
                 >
                   <div
                     className="h-full rounded-full transition-all"
-                    style={{ width: `${pct}%`, backgroundColor: `color-mix(in srgb, ${type.color} 70%, #1a0f00)` }}
+                    style={{ width: `${pct}%`, backgroundColor: getSeverityHexColor(sev) }}
                   />
                 </div>
               </div>
