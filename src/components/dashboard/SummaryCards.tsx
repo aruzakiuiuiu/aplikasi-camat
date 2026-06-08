@@ -1,9 +1,16 @@
 import { TrendingDown, TrendingUp } from "lucide-react";
-import { getRegencyStats, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass, getSeverityHexColor } from "@/data/districts";
+import { DISTRICTS, getRegencyStats, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass, getSeverityHexColor } from "@/data/districts";
 import PovertyDimensionTooltip from "./PovertyDimensionTooltip";
+
+function formatJiwa(n: number) {
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(2)} juta`;
+  if (n >= 1_000) return `${(n / 1_000).toFixed(1)} ribu`;
+  return n.toLocaleString("id-ID");
+}
 
 export default function SummaryCards() {
   const stats = getRegencyStats();
+  const totalPoorPop = DISTRICTS.reduce((s, d) => s + Math.round(d.population * d.povertyRate / 100), 0);
 
   return (
     <div className="space-y-6">
