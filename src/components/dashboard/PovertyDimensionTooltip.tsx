@@ -47,10 +47,10 @@ export default function PovertyDimensionTooltip({
           <p className="text-[11px] text-muted-foreground mt-1">{dimension.focus}</p>
           <div className="flex items-center gap-2 mt-2">
             <span className="text-lg font-bold text-foreground">{score}</span>
-            <span className="text-xs text-muted-foreground">/100</span>
+            <span className="text-xs text-muted-foreground">/5</span>
             <span className={`text-xs font-semibold ${sevColor}`}>({sevLabel})</span>
           </div>
-          <p className="text-[10px] text-muted-foreground mt-1 italic">0 = kondisi ideal · 100 = kemiskinan ekstrem</p>
+          <p className="text-[10px] text-muted-foreground mt-1 italic">1 = kondisi ideal · 5 = kemiskinan ekstrim</p>
           {dimension.rootCause && (
             <div className="mt-2 pt-2 border-t border-border/50">
               <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wide mb-0.5">Akar Masalah:</p>
@@ -82,7 +82,7 @@ export default function PovertyDimensionTooltip({
                     <div className="h-1 rounded-full bg-muted overflow-hidden mb-1">
                       <div
                         className={`h-full rounded-full ${subSevClass.bg.replace("/10", "")}`}
-                        style={{ width: `${subScore}%` }}
+                        style={{ width: `${((subScore - 1) / 4) * 100}%` }}
                       />
                     </div>
                   );

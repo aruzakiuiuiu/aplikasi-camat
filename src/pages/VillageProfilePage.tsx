@@ -133,9 +133,9 @@ export default function VillageProfilePage() {
                     <span className="h-2 w-2 rounded-full" style={{ background: pt.color }} />
                     <span className="text-xs text-muted-foreground">{pt.shortLabel}</span>
                   </div>
-                  <p className="text-xl font-bold" style={{ color: sevColor }}>{score}</p>
+                  <p className="text-xl font-bold" style={{ color: sevColor }}>{score}<span className="text-xs font-normal text-muted-foreground">/5</span></p>
                   <div className="h-1.5 rounded-full bg-muted overflow-hidden mt-1">
-                    <div className="h-full rounded-full" style={{ width: `${score}%`, background: pt.color }} />
+                    <div className="h-full rounded-full" style={{ width: `${((score - 1) / 4) * 100}%`, background: pt.color }} />
                   </div>
                   <p className="text-xs mt-1 font-medium" style={{ color: sevColor }}>{getSeverityLabel(score)}</p>
                 </div>

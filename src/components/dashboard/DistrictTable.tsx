@@ -10,7 +10,7 @@ function ScoreCell({ score }: { score: number }) {
   return (
     <div className="flex items-center gap-1.5">
       <div className="flex-1 h-1.5 rounded-full bg-muted overflow-hidden w-12">
-        <div className={`h-full rounded-full ${sevClass.bg.replace("/10", "")}`} style={{ width: `${score}%` }} />
+        <div className={`h-full rounded-full ${sevClass.bg.replace("/10", "")}`} style={{ width: `${((score - 1) / 4) * 100}%` }} />
       </div>
       <span className={`text-xs font-semibold px-1.5 py-0.5 rounded ${sevClass.bg} ${sevClass.text} mono min-w-[32px] text-center`}>{score}</span>
     </div>

@@ -6,7 +6,7 @@ function PovertyTypeRadar() {
   const data = POVERTY_TYPES.map(t => ({
     subject: t.shortLabel,
     score: stats.avgScores[t.key],
-    fullMark: 100,
+    fullMark: 5,
   }));
 
   return (
@@ -17,9 +17,9 @@ function PovertyTypeRadar() {
         <RadarChart data={data} cx="50%" cy="50%" outerRadius="75%">
           <PolarGrid stroke="hsl(210 20% 87%)" />
           <PolarAngleAxis dataKey="subject" tick={{ fontSize: 12, fill: "hsl(215 20% 48%)", fontFamily: "Plus Jakarta Sans" }} />
-          <PolarRadiusAxis angle={90} domain={[0, 100]} tick={{ fontSize: 10, fill: "hsl(215 20% 48%)" }} />
+          <PolarRadiusAxis angle={90} domain={[0, 5]} tick={{ fontSize: 10, fill: "hsl(215 20% 48%)" }} />
           <Radar name="Indeks" dataKey="score" stroke="hsl(200 72% 28%)" fill="hsl(200 72% 28%)" fillOpacity={0.25} strokeWidth={2} />
-          <Tooltip formatter={(v) => [`${v}/100`, "Indeks"]} contentStyle={{ fontSize: 12, borderRadius: 8, border: "1px solid hsl(210 20% 87%)" }} />
+          <Tooltip formatter={(v) => [`${v}/5`, "Indeks"]} contentStyle={{ fontSize: 12, borderRadius: 8, border: "1px solid hsl(210 20% 87%)" }} />
         </RadarChart>
       </ResponsiveContainer>
     </div>
@@ -75,7 +75,7 @@ function PovertyTypesComparison() {
       <ResponsiveContainer width="100%" height={200}>
         <BarChart data={data} margin={{ left: 0, right: 0, top: 0, bottom: 0 }}>
           <XAxis dataKey="name" tick={{ fontSize: 10, fill: "hsl(215 20% 48%)" }} />
-          <YAxis domain={[0, 100]} tick={{ fontSize: 10, fill: "hsl(215 20% 48%)" }} />
+          <YAxis domain={[0, 5]} tick={{ fontSize: 10, fill: "hsl(215 20% 48%)" }} />
           <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
           <Bar dataKey="personal" name="Personal" fill="#e5d8bd" radius={[2, 2, 0, 0]} />
           <Bar dataKey="social" name="Sosial" fill="#fed9a6" radius={[2, 2, 0, 0]} />

@@ -62,8 +62,8 @@ function ScorecardRow({ district }: { district: typeof DISTRICTS[0] }) {
   const sevColor = getSeverityColorClass(sev).text;
   const trendIcon = district.trend === "improving" ? <TrendingDown className="h-3 w-3 text-severity-low" /> : district.trend === "worsening" ? <TrendingUp className="h-3 w-3 text-severity-high" /> : <Minus className="h-3 w-3 text-severity-medium" />;
   
-  // Mock performance score (0-100)
-  const perfScore = Math.max(20, 100 - avg + (district.trend === "improving" ? 15 : district.trend === "worsening" ? -10 : 0));
+  // Mock performance score (0-100) — derived from 1–5 index
+  const perfScore = Math.max(20, Math.min(100, 100 - (avg - 1) * 20 + (district.trend === "improving" ? 15 : district.trend === "worsening" ? -10 : 0)));
   const perfColor = perfScore >= 70 ? "text-severity-low" : perfScore >= 45 ? "text-severity-medium" : "text-severity-high";
 
   return (

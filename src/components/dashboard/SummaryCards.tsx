@@ -50,7 +50,7 @@ export default function SummaryCards() {
           const sev = getSeverity(score);
           const severity = getSeverityLabel(score);
           const severityColor = getSeverityColorClass(sev).text;
-          const pct = score;
+          const pct = ((score - 1) / 4) * 100;
           return (
             <PovertyDimensionTooltip key={type.key} dimensionKey={type.key} score={score}>
               <div className="dashboard-card p-4">
@@ -61,7 +61,7 @@ export default function SummaryCards() {
                   </span>
                   <span className={`text-xs font-bold ${severityColor}`}>{severity}</span>
                 </div>
-                <p className="text-2xl font-bold text-foreground mb-1">{score}<span className="text-sm font-normal text-muted-foreground">/100</span></p>
+                <p className="text-2xl font-bold text-foreground mb-1">{score}<span className="text-sm font-normal text-muted-foreground">/5</span></p>
                 <p className="text-[11px] text-muted-foreground mb-2">{type.label}</p>
                 <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
                   <div

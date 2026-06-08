@@ -132,9 +132,9 @@ function buildVillages(): Village[] {
       const population = Math.max(900, popPer + popJitter);
       const poorFamilies = Math.max(120, poorPer + poorJitter);
       // Kelurahan tend to be slightly less poor
-      const kelBias = v.isKelurahan ? -8 : 0;
-      const noise = () => Math.round((rand() - 0.5) * 12) + kelBias;
-      const clamp = (x: number) => Math.max(5, Math.min(98, x));
+      const kelBias = v.isKelurahan ? -1 : 0;
+      const noise = () => Math.round((rand() - 0.5) * 2) + kelBias;
+      const clamp = (x: number) => Math.max(1, Math.min(5, x));
       const scores: PovertyScale = {
         personal: clamp(district.scores.personal + noise()),
         social: clamp(district.scores.social + noise()),

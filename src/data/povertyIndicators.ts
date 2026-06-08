@@ -206,7 +206,7 @@ export const DIMENSION_DEFINITIONS: DimensionDefinition[] = [
 ];
 
 // Sub-indicator scores per district (mock data aligned with overall scores)
-// Each sub-category gets a score 0-100
+// Each sub-category gets a score 1-5
 export type DimensionSubScores = {
   [subCategoryId: string]: number;
 };
@@ -225,8 +225,8 @@ export type DistrictDimensionScores = {
 function generateSubScores(baseScore: number, subCatIds: string[], seed: number): DimensionSubScores {
   const result: DimensionSubScores = {};
   subCatIds.forEach((id, i) => {
-    const variance = ((seed * (i + 1) * 7 + 13) % 21) - 10; // -10 to +10
-    result[id] = Math.max(0, Math.min(100, baseScore + variance));
+    const variance = ((seed * (i + 1) * 7 + 13) % 3) - 1; // -1, 0, or +1
+    result[id] = Math.max(1, Math.min(5, baseScore + variance));
   });
   return result;
 }

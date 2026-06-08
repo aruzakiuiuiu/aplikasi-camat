@@ -12,18 +12,18 @@ import { Zap, TrendingDown, Target, Lightbulb, ChevronDown, Calculator, MapPin }
 // Intervention types with impact coefficients per poverty dimension
 // Aligned with the holistic poverty framework sub-indicators
 const INTERVENTIONS = [
-  { id: "int-1", name: "Bantuan Sosial Langsung (PKH/BPNT)", category: "Personal", impacts: { personal: -8, social: -3, spatial: 0, structural: -2 }, cost: "Rp 2.4jt/KK/thn", timeframe: "3–6 bulan", targetDimension: "Pendapatan RT, kerentanan keluarga" },
-  { id: "int-2", name: "Program Stunting & Gizi Anak", category: "Personal", impacts: { personal: -12, social: -5, spatial: 0, structural: -3 }, cost: "Rp 5jt/anak/thn", timeframe: "6–18 bulan", targetDimension: "Kesehatan keluarga, gizi" },
-  { id: "int-3", name: "Pembangunan Infrastruktur Air Bersih", category: "Kawasan", impacts: { personal: -3, social: -2, spatial: -15, structural: -5 }, cost: "Rp 350jt/embung", timeframe: "6–12 bulan", targetDimension: "Infrastruktur lingkungan, SDA" },
-  { id: "int-4", name: "Rehabilitasi Jalan Desa", category: "Kawasan", impacts: { personal: -2, social: -4, spatial: -10, structural: -6 }, cost: "Rp 500jt/km", timeframe: "3–9 bulan", targetDimension: "Aksesibilitas fisik, permukiman" },
-  { id: "int-5", name: "KUR & Pemberdayaan Ekonomi", category: "Sosial", impacts: { personal: -6, social: -5, spatial: -1, structural: -8 }, cost: "Rp 10jt/KK", timeframe: "6–24 bulan", targetDimension: "Akses ekonomi, peluang ekonomi lokal" },
-  { id: "int-6", name: "Sanitasi Total Berbasis Masyarakat", category: "Kawasan", impacts: { personal: -5, social: -8, spatial: -12, structural: -4 }, cost: "Rp 15jt/desa", timeframe: "3–12 bulan", targetDimension: "Sanitasi, infrastruktur lingkungan" },
-  { id: "int-7", name: "Peningkatan Kualitas Pendidikan", category: "Personal", impacts: { personal: -10, social: -7, spatial: 0, structural: -5 }, cost: "Rp 50jt/sekolah/thn", timeframe: "12–36 bulan", targetDimension: "Pendidikan & literasi, produktivitas" },
-  { id: "int-8", name: "Penguatan Tata Kelola Desa", category: "Sistem", impacts: { personal: -2, social: -3, spatial: -2, structural: -14 }, cost: "Rp 25jt/desa/thn", timeframe: "6–18 bulan", targetDimension: "Kapasitas kelembagaan, koordinasi" },
-  { id: "int-9", name: "Diversifikasi Pertanian", category: "Sosial", impacts: { personal: -7, social: -4, spatial: -6, structural: -3 }, cost: "Rp 8jt/KK", timeframe: "6–24 bulan", targetDimension: "Mata pencaharian, struktur ekonomi" },
-  { id: "int-10", name: "Mitigasi Bencana & Adaptasi Iklim", category: "Kawasan", impacts: { personal: -1, social: -3, spatial: -18, structural: -6 }, cost: "Rp 200jt/desa", timeframe: "12–36 bulan", targetDimension: "Kondisi geografis, risiko bencana" },
-  { id: "int-11", name: "Pemberdayaan Perempuan & Kesetaraan", category: "Sosial", impacts: { personal: -5, social: -10, spatial: 0, structural: -4 }, cost: "Rp 12jt/kelompok", timeframe: "6–18 bulan", targetDimension: "Peran perempuan, modal sosial" },
-  { id: "int-12", name: "Integrasi Data & Sistem Informasi", category: "Sistem", impacts: { personal: -1, social: -2, spatial: -1, structural: -12 }, cost: "Rp 50jt/sistem", timeframe: "6–12 bulan", targetDimension: "Integrasi data, efektivitas kebijakan" },
+  { id: "int-1", name: "Bantuan Sosial Langsung (PKH/BPNT)", category: "Personal", impacts: { personal: -0.4, social: -0.15, spatial: 0, structural: -0.1 }, cost: "Rp 2.4jt/KK/thn", timeframe: "3–6 bulan", targetDimension: "Pendapatan RT, kerentanan keluarga" },
+  { id: "int-2", name: "Program Stunting & Gizi Anak", category: "Personal", impacts: { personal: -0.6, social: -0.25, spatial: 0, structural: -0.15 }, cost: "Rp 5jt/anak/thn", timeframe: "6–18 bulan", targetDimension: "Kesehatan keluarga, gizi" },
+  { id: "int-3", name: "Pembangunan Infrastruktur Air Bersih", category: "Kawasan", impacts: { personal: -0.15, social: -0.1, spatial: -0.75, structural: -0.25 }, cost: "Rp 350jt/embung", timeframe: "6–12 bulan", targetDimension: "Infrastruktur lingkungan, SDA" },
+  { id: "int-4", name: "Rehabilitasi Jalan Desa", category: "Kawasan", impacts: { personal: -0.1, social: -0.2, spatial: -0.5, structural: -0.3 }, cost: "Rp 500jt/km", timeframe: "3–9 bulan", targetDimension: "Aksesibilitas fisik, permukiman" },
+  { id: "int-5", name: "KUR & Pemberdayaan Ekonomi", category: "Sosial", impacts: { personal: -0.3, social: -0.25, spatial: -0.05, structural: -0.4 }, cost: "Rp 10jt/KK", timeframe: "6–24 bulan", targetDimension: "Akses ekonomi, peluang ekonomi lokal" },
+  { id: "int-6", name: "Sanitasi Total Berbasis Masyarakat", category: "Kawasan", impacts: { personal: -0.25, social: -0.4, spatial: -0.6, structural: -0.2 }, cost: "Rp 15jt/desa", timeframe: "3–12 bulan", targetDimension: "Sanitasi, infrastruktur lingkungan" },
+  { id: "int-7", name: "Peningkatan Kualitas Pendidikan", category: "Personal", impacts: { personal: -0.5, social: -0.35, spatial: 0, structural: -0.25 }, cost: "Rp 50jt/sekolah/thn", timeframe: "12–36 bulan", targetDimension: "Pendidikan & literasi, produktivitas" },
+  { id: "int-8", name: "Penguatan Tata Kelola Desa", category: "Sistem", impacts: { personal: -0.1, social: -0.15, spatial: -0.1, structural: -0.7 }, cost: "Rp 25jt/desa/thn", timeframe: "6–18 bulan", targetDimension: "Kapasitas kelembagaan, koordinasi" },
+  { id: "int-9", name: "Diversifikasi Pertanian", category: "Sosial", impacts: { personal: -0.35, social: -0.2, spatial: -0.3, structural: -0.15 }, cost: "Rp 8jt/KK", timeframe: "6–24 bulan", targetDimension: "Mata pencaharian, struktur ekonomi" },
+  { id: "int-10", name: "Mitigasi Bencana & Adaptasi Iklim", category: "Kawasan", impacts: { personal: -0.05, social: -0.15, spatial: -0.9, structural: -0.3 }, cost: "Rp 200jt/desa", timeframe: "12–36 bulan", targetDimension: "Kondisi geografis, risiko bencana" },
+  { id: "int-11", name: "Pemberdayaan Perempuan & Kesetaraan", category: "Sosial", impacts: { personal: -0.25, social: -0.5, spatial: 0, structural: -0.2 }, cost: "Rp 12jt/kelompok", timeframe: "6–18 bulan", targetDimension: "Peran perempuan, modal sosial" },
+  { id: "int-12", name: "Integrasi Data & Sistem Informasi", category: "Sistem", impacts: { personal: -0.05, social: -0.1, spatial: -0.05, structural: -0.6 }, cost: "Rp 50jt/sistem", timeframe: "6–12 bulan", targetDimension: "Integrasi data, efektivitas kebijakan" },
 ];
 
 export default function SimulasiPage() {
@@ -49,10 +49,10 @@ export default function SimulasiPage() {
       const intervention = INTERVENTIONS.find(i => i.id === intId);
       if (!intervention) return;
       const intensity = (intensities[intId] || 50) / 100;
-      projected.personal = Math.max(0, projected.personal + intervention.impacts.personal * intensity);
-      projected.social = Math.max(0, projected.social + intervention.impacts.social * intensity);
-      projected.spatial = Math.max(0, projected.spatial + intervention.impacts.spatial * intensity);
-      projected.structural = Math.max(0, projected.structural + intervention.impacts.structural * intensity);
+      projected.personal = Math.max(1, projected.personal + intervention.impacts.personal * intensity);
+      projected.social = Math.max(1, projected.social + intervention.impacts.social * intensity);
+      projected.spatial = Math.max(1, projected.spatial + intervention.impacts.spatial * intensity);
+      projected.structural = Math.max(1, projected.structural + intervention.impacts.structural * intensity);
     });
 
     return {
@@ -78,7 +78,7 @@ export default function SimulasiPage() {
         const totalImpact = Math.abs(int.impacts.personal) + Math.abs(int.impacts.social) + Math.abs(int.impacts.spatial) + Math.abs(int.impacts.structural);
         // Weight by district's weakest areas
         const scores = district.scores;
-        const weighted = (Math.abs(int.impacts.personal) * scores.personal + Math.abs(int.impacts.social) * scores.social + Math.abs(int.impacts.spatial) * scores.spatial + Math.abs(int.impacts.structural) * scores.structural) / 100;
+        const weighted = (Math.abs(int.impacts.personal) * scores.personal + Math.abs(int.impacts.social) * scores.social + Math.abs(int.impacts.spatial) * scores.spatial + Math.abs(int.impacts.structural) * scores.structural) / 20;
         return { ...int, totalImpact, weighted };
       })
       .sort((a, b) => b.weighted - a.weighted)
@@ -89,7 +89,7 @@ export default function SimulasiPage() {
     subject: pt.shortLabel,
     current: district.scores[pt.key],
     projected: projectedScores[pt.key],
-    fullMark: 100,
+    fullMark: 5,
   }));
 
   const comparisonData = POVERTY_TYPES.map(pt => ({

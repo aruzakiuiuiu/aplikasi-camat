@@ -69,7 +69,7 @@ export default function DistrictProfilePage() {
   const radarData = POVERTY_TYPES.map(pt => ({
     subject: pt.shortLabel,
     score: district.scores[pt.key],
-    fullMark: 100,
+    fullMark: 5,
   }));
 
   const eduData = [
@@ -171,10 +171,10 @@ export default function DistrictProfilePage() {
                     </div>
                     <div className="flex items-end gap-2 mb-2">
                       <span className="text-2xl font-bold" style={{ color: sevColor }}>{score}</span>
-                      <span className="text-xs text-muted-foreground mb-1">/100</span>
+                      <span className="text-xs text-muted-foreground mb-1">/5</span>
                     </div>
                     <div className="h-1.5 rounded-full bg-muted overflow-hidden">
-                      <div className="h-full rounded-full transition-all" style={{ width: `${score}%`, background: pt.color }} />
+                      <div className="h-full rounded-full transition-all" style={{ width: `${((score - 1) / 4) * 100}%`, background: pt.color }} />
                     </div>
                     <p className="text-xs font-semibold mt-2" style={{ color: sevColor }}>{getSeverityLabel(score)}</p>
                     <p className="text-xs text-muted-foreground mt-0.5">{pt.description}</p>
@@ -310,7 +310,7 @@ export default function DistrictProfilePage() {
                 <div key={dim.key} className="dashboard-card p-4">
                   <div className="flex items-center justify-between mb-1">
                     <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">{dim.label}</h4>
-                    <span className={`text-sm font-bold mono ${dimSevColor}`}>{dimScore}/100</span>
+                    <span className={`text-sm font-bold mono ${dimSevColor}`}>{dimScore}/5</span>
                   </div>
                   <p className="text-[10px] text-muted-foreground mb-3">{dim.focus}</p>
                   <div className="space-y-2.5">
@@ -325,7 +325,7 @@ export default function DistrictProfilePage() {
                             <span className={`text-xs font-bold mono ${subSevClass.text}`}>{subScore}</span>
                           </div>
                           <div className="h-1.5 rounded-full bg-muted overflow-hidden">
-                            <div className={`h-full rounded-full ${subSevClass.bg.replace("/10", "")}`} style={{ width: `${subScore}%` }} />
+                            <div className={`h-full rounded-full ${subSevClass.bg.replace("/10", "")}`} style={{ width: `${((subScore - 1) / 4) * 100}%` }} />
                           </div>
                           <p className="text-[10px] text-muted-foreground mt-0.5">{sub.description}</p>
                         </div>
