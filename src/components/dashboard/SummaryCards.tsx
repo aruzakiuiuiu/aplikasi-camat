@@ -24,8 +24,8 @@ export default function SummaryCards() {
         </div>
         <div className="dashboard-card p-4">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">KK Miskin</p>
-          <p className="text-3xl font-bold text-foreground">{(stats.totalPoor / 1000).toFixed(1)}K</p>
-          <p className="text-xs text-muted-foreground mt-1">dari {(stats.totalPop / 1000).toFixed(0)}K jiwa</p>
+          <p className="text-3xl font-bold text-foreground">{stats.totalPoor >= 1_000_000 ? `${(stats.totalPoor / 1_000_000).toFixed(1)} juta` : `${(stats.totalPoor / 1000).toFixed(1)} ribu`}</p>
+          <p className="text-xs text-muted-foreground mt-1">dari {stats.totalPop >= 1_000_000 ? `${(stats.totalPop / 1_000_000).toFixed(1)} juta` : `${(stats.totalPop / 1000).toFixed(0)} ribu`} jiwa</p>
         </div>
         <div className="dashboard-card p-4">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Rata-rata Kemiskinan</p>
@@ -55,7 +55,7 @@ export default function SummaryCards() {
           <h2 className="text-sm font-bold text-foreground uppercase tracking-wider">Indeks 4 Domain Kemiskinan</h2>
           <div className="flex-1 h-px bg-border" />
         </div>
-        <p className="text-xs text-muted-foreground -mt-1 mb-4">Rata-rata indeks per domain · skala 1–5 (1 = sangat rendah, 5 = sangat tinggi) · hover kartu untuk detail</p>
+        <p className="text-xs text-muted-foreground -mt-1 mb-4">Rata-rata indeks per domain · Skala 1–5 (1 = sangat rendah, 5 = sangat tinggi) · Arahkan kursor ke kartu untuk detail</p>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {POVERTY_TYPES.map((type, i) => {
           const Icon = icons[i];
