@@ -8,8 +8,14 @@ export default function SummaryCards() {
   const stats = getRegencyStats();
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* Top row: Overall KPIs */}
+      <div>
+        <div className="flex items-center gap-2 mb-3">
+          <h2 className="text-sm font-bold text-foreground uppercase tracking-wider">Statistik Kemiskinan Kabupaten</h2>
+          <div className="flex-1 h-px bg-border" />
+        </div>
+        <p className="text-xs text-muted-foreground -mt-1 mb-4">Ringkasan kondisi kemiskinan Kabupaten Bojonegoro</p>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="dashboard-card p-4">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Total Kecamatan</p>
@@ -41,8 +47,15 @@ export default function SummaryCards() {
           </div>
         </div>
       </div>
+      </div>
 
       {/* Poverty type score cards */}
+      <div>
+        <div className="flex items-center gap-2 mb-3">
+          <h2 className="text-sm font-bold text-foreground uppercase tracking-wider">Indeks 4 Domain Kemiskinan</h2>
+          <div className="flex-1 h-px bg-border" />
+        </div>
+        <p className="text-xs text-muted-foreground -mt-1 mb-4">Rata-rata indeks per domain · skala 1–5 (1 = sangat rendah, 5 = sangat tinggi) · hover kartu untuk detail</p>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {POVERTY_TYPES.map((type, i) => {
           const Icon = icons[i];
@@ -73,6 +86,7 @@ export default function SummaryCards() {
             </PovertyDimensionTooltip>
           );
         })}
+      </div>
       </div>
     </div>
   );
