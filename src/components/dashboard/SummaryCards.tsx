@@ -1,9 +1,16 @@
 import { TrendingDown, TrendingUp } from "lucide-react";
-import { getRegencyStats, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass, getSeverityHexColor } from "@/data/districts";
+import { DISTRICTS, getRegencyStats, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass, getSeverityHexColor } from "@/data/districts";
 import PovertyDimensionTooltip from "./PovertyDimensionTooltip";
+
+function formatJiwa(n: number) {
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(2)} juta`;
+  if (n >= 1_000) return `${(n / 1_000).toFixed(1)} ribu`;
+  return n.toLocaleString("id-ID");
+}
 
 export default function SummaryCards() {
   const stats = getRegencyStats();
+  const totalPoorPop = DISTRICTS.reduce((s, d) => s + Math.round(d.population * d.povertyRate / 100), 0);
 
   return (
     <div className="space-y-6">
@@ -21,9 +28,9 @@ export default function SummaryCards() {
           <p className="text-xs text-muted-foreground mt-1">Kabupaten Bojonegoro</p>
         </div>
         <div className="dashboard-card p-4">
-          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">KK Miskin</p>
-          <p className="text-3xl font-bold text-foreground">{stats.totalPoor >= 1_000_000 ? `${(stats.totalPoor / 1_000_000).toFixed(1)} juta` : `${(stats.totalPoor / 1000).toFixed(1)} ribu`}</p>
-          <p className="text-xs text-muted-foreground mt-1">dari {stats.totalPop >= 1_000_000 ? `${(stats.totalPop / 1_000_000).toFixed(1)} juta` : `${(stats.totalPop / 1000).toFixed(0)} ribu`} jiwa</p>
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Penduduk Miskin</p>
+          <p className="text-3xl font-bold text-foreground">{formatJiwa(totalPoorPop)}</p>
+          <p className="text-xs text-muted-foreground mt-1">dari {formatJiwa(stats.totalPop)} jiwa</p>
         </div>
         <div className="dashboard-card p-4">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Rata-rata Kemiskinan</p>
