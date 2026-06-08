@@ -28,9 +28,9 @@ export default function SummaryCards() {
           <p className="text-xs text-muted-foreground mt-1">Kabupaten Bojonegoro</p>
         </div>
         <div className="dashboard-card p-4">
-          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">KK Miskin</p>
-          <p className="text-3xl font-bold text-foreground">{stats.totalPoor >= 1_000_000 ? `${(stats.totalPoor / 1_000_000).toFixed(1)} juta` : `${(stats.totalPoor / 1000).toFixed(1)} ribu`}</p>
-          <p className="text-xs text-muted-foreground mt-1">dari {stats.totalPop >= 1_000_000 ? `${(stats.totalPop / 1_000_000).toFixed(1)} juta` : `${(stats.totalPop / 1000).toFixed(0)} ribu`} jiwa</p>
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Penduduk Miskin</p>
+          <p className="text-3xl font-bold text-foreground">{formatJiwa(totalPoorPop)}</p>
+          <p className="text-xs text-muted-foreground mt-1">dari {formatJiwa(stats.totalPop)} jiwa</p>
         </div>
         <div className="dashboard-card p-4">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Rata-rata Kemiskinan</p>
