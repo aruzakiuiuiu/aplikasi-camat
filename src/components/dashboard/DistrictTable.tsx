@@ -1,18 +1,25 @@
 import { useState } from "react";
 import { ChevronUp, ChevronDown, TrendingUp, TrendingDown, Minus, Search } from "lucide-react";
-import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass, type District } from "@/data/districts";
+import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityDarkColor, getSeverityHexColor, type District } from "@/data/districts";
 
 type SortKey = "name" | "povertyRate" | "personal" | "social" | "spatial" | "structural";
 
 function ScoreCell({ score }: { score: number }) {
   const sev = getSeverity(score);
-  const sevClass = getSeverityColorClass(sev);
+  const dark = getSeverityDarkColor(sev);
+  const fill = sev === "sedang" ? "#c8a900" : getSeverityHexColor(sev);
+  const pct = ((score - 1) / 4) * 100;
   return (
-    <div className="flex items-center gap-1.5">
-      <div className="flex-1 h-1.5 rounded-full bg-muted overflow-hidden w-12">
-        <div className={`h-full rounded-full ${sevClass.bg.replace("/10", "")}`} style={{ width: `${((score - 1) / 4) * 100}%` }} />
+    <div className="flex items-center gap-2">
+      <span
+        className="text-xs font-semibold px-1.5 py-0.5 rounded whitespace-nowrap"
+        style={{ color: dark, backgroundColor: `${fill}22`, border: `1px solid ${fill}88` }}
+      >
+        {getSeverityLabel(score)}
+      </span>
+      <div className="flex-1 h-1.5 rounded-full bg-gray-200 overflow-hidden min-w-[32px]">
+        <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, backgroundColor: fill }} />
       </div>
-      <span className={`text-xs font-semibold px-1.5 py-0.5 rounded ${sevClass.bg} ${sevClass.text} mono min-w-[32px] text-center`}>{score}</span>
     </div>
   );
 }

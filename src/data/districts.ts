@@ -103,7 +103,7 @@ export function getSeverityColorClass(severity: "sangat-tinggi" | "tinggi" | "se
   return severityMap[severity] || severityMap["sedang"];
 }
 
-// Helper function to get hex color for severity level
+// Helper function to get hex color for severity level (progress bar / visual fills)
 export function getSeverityHexColor(severity: "sangat-tinggi" | "tinggi" | "sedang" | "rendah" | "sangat-rendah"): string {
   const severityColorMap = {
     "sangat-tinggi": "#d7191c",
@@ -113,4 +113,16 @@ export function getSeverityHexColor(severity: "sangat-tinggi" | "tinggi" | "seda
     "sangat-rendah": "#2b83ba",
   };
   return severityColorMap[severity] || "#ffffbf";
+}
+
+// Darker variant — readable as text / badge label on light backgrounds
+export function getSeverityDarkColor(severity: "sangat-tinggi" | "tinggi" | "sedang" | "rendah" | "sangat-rendah"): string {
+  const darkColorMap = {
+    "sangat-tinggi": "#c0100e",
+    "tinggi":        "#b05010",
+    "sedang":        "#8a7200",
+    "rendah":        "#1a6b1a",
+    "sangat-rendah": "#155090",
+  };
+  return darkColorMap[severity] || "#8a7200";
 }

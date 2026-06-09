@@ -1,5 +1,5 @@
 import { TrendingDown, TrendingUp } from "lucide-react";
-import { DISTRICTS, getRegencyStats, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass, getSeverityHexColor } from "@/data/districts";
+import { DISTRICTS, getRegencyStats, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityDarkColor, getSeverityHexColor } from "@/data/districts";
 import PovertyDimensionTooltip from "./PovertyDimensionTooltip";
 
 function formatJiwa(n: number) {
@@ -60,13 +60,13 @@ export default function SummaryCards() {
           <h2 className="text-sm font-bold text-foreground uppercase tracking-wider">Indeks 4 Domain Kemiskinan</h2>
           <div className="flex-1 h-px bg-border" />
         </div>
-        <p className="text-xs text-muted-foreground -mt-1 mb-4">Rata-rata indeks per domain · Skala 1–5 (1 = sangat rendah, 5 = sangat tinggi) · Arahkan kursor ke kartu untuk detail</p>
+        <p className="text-xs text-muted-foreground -mt-1 mb-4">Rata-rata indeks kemiskinan per domain · Skala 1–5: semakin tinggi angka, semakin tinggi tingkat kemiskinan · Arahkan kursor ke kartu untuk detail</p>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-        {POVERTY_TYPES.map((type, i) => {
+        {POVERTY_TYPES.map((type) => {
           const score = stats.avgScores[type.key];
           const sev = getSeverity(score);
           const severity = getSeverityLabel(score);
-          const severityColor = getSeverityColorClass(sev).text;
+          const darkColor = getSeverityDarkColor(sev);
           const pct = ((score - 1) / 4) * 100;
           const labelColor = `color-mix(in srgb, ${type.color} 60%, #1a0f00)`;
           return (
@@ -78,11 +78,9 @@ export default function SummaryCards() {
                 <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: labelColor }}>
                   {type.label}
                 </p>
-                <p className="text-2xl font-bold text-foreground mb-1">{score}<span className="text-sm font-normal text-muted-foreground">/5</span></p>
-                <p className={`text-xs font-semibold mb-3 ${severityColor}`}>{severity}</p>
-                <div
-                  className="h-1.5 w-full rounded-full overflow-hidden mt-auto bg-gray-200"
-                >
+                <p className="text-xl font-bold mb-0.5" style={{ color: darkColor }}>{severity}</p>
+                <p className="text-xs text-muted-foreground mb-3">Indeks {score}/5</p>
+                <div className="h-1.5 w-full rounded-full overflow-hidden mt-auto bg-gray-200">
                   <div
                     className="h-full rounded-full transition-all"
                     style={{ width: `${pct}%`, backgroundColor: sev === "sedang" ? "#c8a900" : getSeverityHexColor(sev) }}

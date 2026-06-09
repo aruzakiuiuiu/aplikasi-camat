@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass, getSeverityHexColor } from "@/data/districts";
+import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityColorClass, getSeverityHexColor, getSeverityDarkColor } from "@/data/districts";
 import { getDistrictProfile } from "@/data/districtProfiles";
 import { getVillagesByDistrict } from "@/data/villages";
 
@@ -161,7 +161,8 @@ export default function DistrictProfilePage() {
             {POVERTY_TYPES.map(pt => {
               const score = district.scores[pt.key];
               const sev = getSeverity(score);
-              const sevColor = getSeverityHexColor(sev);
+              const darkColor = getSeverityDarkColor(sev);
+              const fillColor = sev === "sedang" ? "#c8a900" : getSeverityHexColor(sev);
               return (
                 <PovertyDimensionTooltip key={pt.key} dimensionKey={pt.key} score={score} districtId={district.id} districtScores={district.scores}>
                   <div className="dashboard-card p-4">
@@ -169,15 +170,12 @@ export default function DistrictProfilePage() {
                       <span className="h-2.5 w-2.5 rounded-full flex-shrink-0" style={{ background: pt.color }} />
                       <span className="text-xs font-medium text-muted-foreground">{pt.label}</span>
                     </div>
-                    <div className="flex items-end gap-2 mb-2">
-                      <span className="text-2xl font-bold" style={{ color: sevColor }}>{score}</span>
-                      <span className="text-xs text-muted-foreground mb-1">/5</span>
+                    <p className="text-xl font-bold mb-0.5" style={{ color: darkColor }}>{getSeverityLabel(score)}</p>
+                    <p className="text-xs text-muted-foreground mb-2">Indeks {score}/5</p>
+                    <div className="h-1.5 rounded-full bg-gray-200 overflow-hidden">
+                      <div className="h-full rounded-full transition-all" style={{ width: `${((score - 1) / 4) * 100}%`, backgroundColor: fillColor }} />
                     </div>
-                    <div className="h-1.5 rounded-full bg-muted overflow-hidden">
-                      <div className="h-full rounded-full transition-all" style={{ width: `${((score - 1) / 4) * 100}%`, background: pt.color }} />
-                    </div>
-                    <p className="text-xs font-semibold mt-2" style={{ color: sevColor }}>{getSeverityLabel(score)}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">{pt.description}</p>
+                    <p className="text-xs text-muted-foreground mt-2">{pt.description}</p>
                   </div>
                 </PovertyDimensionTooltip>
               );
