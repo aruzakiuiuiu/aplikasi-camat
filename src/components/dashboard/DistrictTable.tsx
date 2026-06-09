@@ -18,9 +18,9 @@ function ScoreCell({ score }: { score: number }) {
 }
 
 function TrendBadge({ trend }: { trend: District["trend"] }) {
-  if (trend === "improving") return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold border bg-severity-low/10 text-severity-low border-severity-low/25"><TrendingDown className="h-3 w-3" />Membaik</span>;
-  if (trend === "worsening") return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold border bg-severity-high/10 text-severity-high border-severity-high/25"><TrendingUp className="h-3 w-3" />Memburuk</span>;
-  return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold border bg-muted text-muted-foreground border-border"><Minus className="h-3 w-3" />Stabil</span>;
+  if (trend === "improving") return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold" style={{ color: "#1a6b1a", backgroundColor: "rgba(171,221,164,0.2)", border: "1px solid rgba(171,221,164,0.6)" }}><TrendingDown className="h-3 w-3" />Membaik</span>;
+  if (trend === "worsening") return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold" style={{ color: "#d7191c", backgroundColor: "rgba(215,25,28,0.1)", border: "1px solid rgba(215,25,28,0.35)" }}><TrendingUp className="h-3 w-3" />Memburuk</span>;
+  return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold" style={{ color: "#6b7280", backgroundColor: "rgba(107,114,128,0.1)", border: "1px solid rgba(107,114,128,0.3)" }}><Minus className="h-3 w-3" />Stabil</span>;
 }
 
 export default function DistrictTable() {

@@ -35,7 +35,7 @@ export default function SummaryCards() {
         <div className="dashboard-card p-4">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Tingkat Kemiskinan</p>
           <p className="text-3xl font-bold text-foreground">{stats.avgPovRate.toFixed(1)}%</p>
-          <p className="text-xs text-muted-foreground mt-1">se-kabupaten</p>
+          <p className="text-xs text-muted-foreground mt-1">Kabupaten Bojonegoro</p>
         </div>
         <div className="dashboard-card p-4">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Kecamatan Membaik</p>

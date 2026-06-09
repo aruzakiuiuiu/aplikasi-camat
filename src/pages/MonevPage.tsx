@@ -74,11 +74,14 @@ function ScorecardRow({ district }: { district: typeof DISTRICTS[0] }) {
       </td>
       <td className="px-4 py-3 text-center">{district.povertyRate}%</td>
       <td className="px-4 py-3 text-center">
-        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold border ${
-          district.trend === "improving" ? "bg-severity-low/10 text-severity-low border-severity-low/25"
-          : district.trend === "worsening" ? "bg-severity-high/10 text-severity-high border-severity-high/25"
-          : "bg-muted text-muted-foreground border-border"
-        }`}>
+        <span
+          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold"
+          style={district.trend === "improving"
+            ? { color: "#1a6b1a", backgroundColor: "rgba(171,221,164,0.2)", border: "1px solid rgba(171,221,164,0.6)" }
+            : district.trend === "worsening"
+            ? { color: "#d7191c", backgroundColor: "rgba(215,25,28,0.1)", border: "1px solid rgba(215,25,28,0.35)" }
+            : { color: "#6b7280", backgroundColor: "rgba(107,114,128,0.1)", border: "1px solid rgba(107,114,128,0.3)" }}
+        >
           {trendIcon}
           {district.trend === "improving" ? "Membaik" : district.trend === "worsening" ? "Memburuk" : "Stabil"}
         </span>
