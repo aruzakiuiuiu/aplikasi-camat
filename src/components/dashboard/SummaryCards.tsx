@@ -34,7 +34,7 @@ export default function SummaryCards() {
         </div>
         <div className="dashboard-card p-4">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Tingkat Kemiskinan</p>
-          <p className="text-3xl font-bold text-foreground">{(totalPoorPop / stats.totalPop * 100).toFixed(1)}%</p>
+          <p className="text-3xl font-bold text-foreground">11,49%</p>
           <p className="text-xs text-muted-foreground mt-1">Kabupaten Bojonegoro</p>
         </div>
         <div className="dashboard-card p-4">
