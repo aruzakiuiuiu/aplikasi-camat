@@ -96,7 +96,7 @@ export default function BojonegoroMap({ hoveredId, onHover }: Props) {
     });
 
     pathLayer.on("mouseout", () => {
-      const sev = district ? getSeverity(avgScore(district.scores)) : "medium";
+      const sev = district ? getSeverity(avgScore(district.scores)) : "sedang";
       pathLayer.setStyle({
         fillColor: getSeverityFillColor(sev),
         fillOpacity: 0.7,
