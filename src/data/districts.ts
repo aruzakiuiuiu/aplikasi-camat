@@ -48,10 +48,10 @@ export const DISTRICTS: District[] = [
 ];
 
 export const POVERTY_TYPES = [
-  { key: "personal" as const, label: "Domain Personal-Keluarga", shortLabel: "Personal", color: "#e5d8bd", bgClass: "stat-badge-personal", description: "Kondisi individu dan rumah tangga yang mempengaruhi kapasitas keluar dari jerat kemiskinan" },
-  { key: "social" as const, label: "Domain Sosial-Ekonomi Lokal", shortLabel: "Sosial", color: "#fed9a6", bgClass: "stat-badge-social", description: "Nilai budaya, pola hubungan sosial, dan struktur ekonomi lokal yang mempengaruhi pemerataan kesejahteraan" },
-  { key: "spatial" as const, label: "Domain Kawasan-Lingkungan", shortLabel: "Kawasan", color: "#ccebc5", bgClass: "stat-badge-spatial", description: "Kondisi geografis, daya dukung lingkungan, dan infrastruktur fisik yang menciptakan kerentanan" },
-  { key: "structural" as const, label: "Domain Sistem-Kelembagaan", shortLabel: "Sistem", color: "#decbe4", bgClass: "stat-badge-structural", description: "Struktur kebijakan, tata kelola pemerintahan, dan sinergi lintas sektor penanggulangan kemiskinan" },
+  { key: "personal" as const, label: "Domain Personal-Keluarga", shortLabel: "Personal", color: "#e5d8bd", chartColor: "#a07840", bgClass: "stat-badge-personal", description: "Kondisi individu dan rumah tangga yang mempengaruhi kapasitas keluar dari jerat kemiskinan" },
+  { key: "social" as const, label: "Domain Sosial-Ekonomi Lokal", shortLabel: "Sosial", color: "#fed9a6", chartColor: "#d4780a", bgClass: "stat-badge-social", description: "Nilai budaya, pola hubungan sosial, dan struktur ekonomi lokal yang mempengaruhi pemerataan kesejahteraan" },
+  { key: "spatial" as const, label: "Domain Kawasan-Lingkungan", shortLabel: "Kawasan", color: "#ccebc5", chartColor: "#3d9e3d", bgClass: "stat-badge-spatial", description: "Kondisi geografis, daya dukung lingkungan, dan infrastruktur fisik yang menciptakan kerentanan" },
+  { key: "structural" as const, label: "Domain Sistem-Kelembagaan", shortLabel: "Sistem", color: "#decbe4", chartColor: "#8a4fa0", bgClass: "stat-badge-structural", description: "Struktur kebijakan, tata kelola pemerintahan, dan sinergi lintas sektor penanggulangan kemiskinan" },
 ];
 
 export function getRegencyStats() {

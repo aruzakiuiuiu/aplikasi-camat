@@ -67,7 +67,7 @@ function PovertyTypesComparison() {
       <div className="flex flex-wrap gap-3 mb-3">
         {POVERTY_TYPES.map(t => (
           <span key={t.key} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <span className="h-2.5 w-2.5 rounded-sm inline-block" style={{ backgroundColor: t.color }} />
+            <span className="h-2.5 w-2.5 rounded-sm inline-block" style={{ backgroundColor: t.chartColor }} />
             {t.shortLabel}
           </span>
         ))}
@@ -77,10 +77,10 @@ function PovertyTypesComparison() {
           <XAxis dataKey="name" tick={{ fontSize: 10, fill: "hsl(215 20% 48%)" }} />
           <YAxis domain={[0, 5]} tick={{ fontSize: 10, fill: "hsl(215 20% 48%)" }} />
           <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
-          <Bar dataKey="personal" name="Personal" fill="#e5d8bd" radius={[2, 2, 0, 0]} />
-          <Bar dataKey="social" name="Sosial" fill="#fed9a6" radius={[2, 2, 0, 0]} />
-          <Bar dataKey="spatial" name="Kawasan" fill="#ccebc5" radius={[2, 2, 0, 0]} />
-          <Bar dataKey="structural" name="Sistem" fill="#decbe4" radius={[2, 2, 0, 0]} />
+          <Bar dataKey="personal" name="Personal" fill="#a07840" radius={[2, 2, 0, 0]} />
+          <Bar dataKey="social" name="Sosial" fill="#d4780a" radius={[2, 2, 0, 0]} />
+          <Bar dataKey="spatial" name="Kawasan" fill="#3d9e3d" radius={[2, 2, 0, 0]} />
+          <Bar dataKey="structural" name="Sistem" fill="#8a4fa0" radius={[2, 2, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

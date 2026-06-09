@@ -102,7 +102,7 @@ export default function DistrictTable() {
               {POVERTY_TYPES.map(t => (
                 <th key={t.key} className="px-4 py-3 font-semibold cursor-pointer hover:text-foreground min-w-[140px]" onClick={() => handleSort(t.key)}>
                   <span className="flex items-center gap-1">
-                    <span className="h-2 w-2 rounded-full inline-block flex-shrink-0" style={{ backgroundColor: t.color }} />
+                    <span className="h-2 w-2 rounded-full inline-block flex-shrink-0" style={{ backgroundColor: t.chartColor }} />
                     {t.shortLabel} <SortIcon col={t.key} />
                   </span>
                 </th>
