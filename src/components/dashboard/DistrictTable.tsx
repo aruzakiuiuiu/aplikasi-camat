@@ -8,19 +8,13 @@ function ScoreCell({ score }: { score: number }) {
   const sev = getSeverity(score);
   const dark = getSeverityDarkColor(sev);
   const fill = sev === "sedang" ? "#c8a900" : getSeverityHexColor(sev);
-  const pct = ((score - 1) / 4) * 100;
   return (
-    <div className="flex items-center gap-2">
-      <span
-        className="text-xs font-semibold px-1.5 py-0.5 rounded whitespace-nowrap"
-        style={{ color: dark, backgroundColor: `${fill}22`, border: `1px solid ${fill}88` }}
-      >
-        {getSeverityLabel(score)}
-      </span>
-      <div className="flex-1 h-1.5 rounded-full bg-gray-200 overflow-hidden min-w-[32px]">
-        <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, backgroundColor: fill }} />
-      </div>
-    </div>
+    <span
+      className="text-xs font-semibold px-1.5 py-0.5 rounded whitespace-nowrap"
+      style={{ color: dark, backgroundColor: `${fill}22`, border: `1px solid ${fill}88` }}
+    >
+      {getSeverityLabel(score)}
+    </span>
   );
 }
 
