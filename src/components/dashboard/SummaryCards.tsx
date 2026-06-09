@@ -16,9 +16,9 @@ export default function SummaryCards() {
         <p className="text-xs text-muted-foreground -mt-1 mb-4">Ringkasan kondisi kemiskinan Kabupaten Bojonegoro</p>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="dashboard-card p-4">
-          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Total Kecamatan</p>
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Jumlah Kecamatan</p>
           <p className="text-3xl font-bold text-foreground">28</p>
-          <p className="text-xs text-muted-foreground mt-1">Kabupaten Bojonegoro</p>
+          <p className="text-xs text-muted-foreground mt-1">di Kabupaten Bojonegoro</p>
         </div>
         <div className="dashboard-card p-4">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">KK Miskin</p>
@@ -26,9 +26,9 @@ export default function SummaryCards() {
           <p className="text-xs text-muted-foreground mt-1">dari {stats.totalPop >= 1_000_000 ? `${(stats.totalPop / 1_000_000).toFixed(1)} juta` : `${(stats.totalPop / 1000).toFixed(0)} ribu`} jiwa</p>
         </div>
         <div className="dashboard-card p-4">
-          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Rata-rata Kemiskinan</p>
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Tingkat Kemiskinan</p>
           <p className="text-3xl font-bold text-foreground">{stats.avgPovRate.toFixed(1)}%</p>
-          <p className="text-xs text-muted-foreground mt-1">Tingkat kemiskinan kabupaten</p>
+          <p className="text-xs text-muted-foreground mt-1">se-kabupaten</p>
         </div>
         <div className="dashboard-card p-4">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Kecamatan Membaik</p>
