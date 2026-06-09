@@ -1,18 +1,14 @@
 import { useState } from "react";
 import { ChevronUp, ChevronDown, TrendingUp, TrendingDown, Minus, Search } from "lucide-react";
-import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityDarkColor, getSeverityHexColor, type District } from "@/data/districts";
+import { DISTRICTS, POVERTY_TYPES, getSeverity, getSeverityLabel, getSeverityDarkColor, type District } from "@/data/districts";
 
 type SortKey = "name" | "povertyRate" | "personal" | "social" | "spatial" | "structural";
 
 function ScoreCell({ score }: { score: number }) {
   const sev = getSeverity(score);
   const dark = getSeverityDarkColor(sev);
-  const fill = sev === "sedang" ? "#c8a900" : getSeverityHexColor(sev);
   return (
-    <span
-      className="text-xs font-semibold px-1.5 py-0.5 rounded whitespace-nowrap"
-      style={{ color: dark, backgroundColor: `${fill}22`, border: `1px solid ${fill}88` }}
-    >
+    <span className="text-xs font-semibold" style={{ color: dark }}>
       {getSeverityLabel(score)}
     </span>
   );
@@ -94,8 +90,8 @@ export default function DistrictTable() {
                 <span className="flex items-center justify-end gap-1">% Kemiskinan <SortIcon col="povertyRate" /></span>
               </th>
               {POVERTY_TYPES.map(t => (
-                <th key={t.key} className="px-4 py-3 font-semibold cursor-pointer hover:text-foreground min-w-[140px]" onClick={() => handleSort(t.key)}>
-                  <span className="flex items-center gap-1">
+                <th key={t.key} className="w-28 px-3 py-3 font-semibold cursor-pointer hover:text-foreground text-center" onClick={() => handleSort(t.key)}>
+                  <span className="inline-flex items-center justify-center gap-1">
                     <span className="h-2 w-2 rounded-full inline-block flex-shrink-0" style={{ backgroundColor: t.chartColor }} />
                     {t.shortLabel} <SortIcon col={t.key} />
                   </span>
@@ -110,19 +106,19 @@ export default function DistrictTable() {
                 <td className="px-4 py-3 text-muted-foreground text-xs mono">{idx + 1}</td>
                 <td className="px-4 py-3">
                   <div>
-                    <p className="font-semibold text-foreground">{district.name}</p>
-                    <p className="text-xs text-muted-foreground">{district.poorFamilies.toLocaleString()} KK miskin</p>
+                    <p className="text-xs font-semibold text-foreground">{district.name}</p>
+                    <p className="text-[11px] text-muted-foreground">{district.poorFamilies.toLocaleString()} KK miskin</p>
                   </div>
                 </td>
                 <td className="px-4 py-3 text-right">
-                  <span className={`text-sm font-bold mono ${district.povertyRate >= 23 ? "text-severity-high" : district.povertyRate >= 18 ? "text-severity-medium" : "text-severity-low"}`}>
+                  <span className={`text-xs font-bold mono ${district.povertyRate >= 23 ? "text-severity-high" : district.povertyRate >= 18 ? "text-severity-medium" : "text-severity-low"}`}>
                     {district.povertyRate}%
                   </span>
                 </td>
-                <td className="px-4 py-3"><ScoreCell score={district.scores.personal} /></td>
-                <td className="px-4 py-3"><ScoreCell score={district.scores.social} /></td>
-                <td className="px-4 py-3"><ScoreCell score={district.scores.spatial} /></td>
-                <td className="px-4 py-3"><ScoreCell score={district.scores.structural} /></td>
+                <td className="w-28 px-3 py-3 text-center"><ScoreCell score={district.scores.personal} /></td>
+                <td className="w-28 px-3 py-3 text-center"><ScoreCell score={district.scores.social} /></td>
+                <td className="w-28 px-3 py-3 text-center"><ScoreCell score={district.scores.spatial} /></td>
+                <td className="w-28 px-3 py-3 text-center"><ScoreCell score={district.scores.structural} /></td>
                 <td className="px-4 py-3"><TrendBadge trend={district.trend} /></td>
               </tr>
             ))}
