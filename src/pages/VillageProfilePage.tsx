@@ -45,9 +45,16 @@ export default function VillageProfilePage() {
 
   const avg = Math.round((village.scores.personal + village.scores.social + village.scores.spatial + village.scores.structural) / 4);
   const overallSeverity = getSeverity(avg);
-  const severityClass = getSeverityColorClass(overallSeverity);
-  const sevColor = severityClass.text;
-  const sevBg = `${severityClass.bg} ${severityClass.text} ${severityClass.border}`;
+  const sevColor = overallSeverity === "sangat-tinggi" || overallSeverity === "tinggi"
+    ? "text-severity-high"
+    : overallSeverity === "sedang"
+    ? "text-severity-medium"
+    : "text-severity-low";
+  const sevBg = overallSeverity === "sangat-tinggi" || overallSeverity === "tinggi"
+    ? "bg-severity-high/10 text-severity-high border-severity-high/25"
+    : overallSeverity === "sedang"
+    ? "bg-severity-medium/10 text-severity-medium border-severity-medium/25"
+    : "bg-severity-low/10 text-severity-low border-severity-low/25";
 
   const conditionLabel = {
     sangat_miskin: "Sangat Miskin",
